@@ -1,4 +1,5 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 const navLinks = [
   { href: '#home', icon: 'fa-solid fa-house', label: 'Home' },
@@ -375,6 +376,7 @@ function App() {
           </span>
         </footer>
       </main>
+      <Analytics />
     </div>
   );
 }
