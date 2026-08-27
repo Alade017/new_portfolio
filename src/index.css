@@ -462,6 +462,8 @@ section {
   font-weight: 200;
 }
 
+/* SKILL SECTION SYLING */
+
 #skills {
   background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
   color: #f8fafc;
@@ -629,6 +631,8 @@ section {
   color: #93c5fd;
 }
 
+/* PROJECTS STYLING SECTION */
+
 #projects {
   background: linear-gradient(180deg, #f8fafc 0%, #edf2ff 100%);
 }
@@ -641,18 +645,10 @@ section {
   margin: 0 auto;
 }
 
-.featured-project {
-  grid-column: span 2;
-}
-
-/* .project-card {
-  perspective: 1000px;
-} */
-
 .project-img {
   height: 100%;
   color: #eef2ff;
-  border-radius: 22px;
+  border-radius: 12px;
   overflow: hidden;
   background: #fff;
   border: 1px solid rgba(148, 163, 184, 0.2);
@@ -660,6 +656,10 @@ section {
   transition:
     transform 0.35s ease,
     box-shadow 0.35s ease;
+}
+
+.featured-project {
+  grid-column: span 2;
 }
 
 .project-img img {
@@ -703,6 +703,8 @@ section {
   font-size: 1rem;
   font-weight: 500;
 }
+
+/* CONTACT SECTION STYLING */
 
 .contact-section {
   background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);

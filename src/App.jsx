@@ -9,12 +9,12 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { href: '#', icon: 'fa-solid fa-envelope', label: 'Email' },
-  { href: 'https://github.com/', icon: 'fa-brands fa-github', label: 'GitHub', external: true },
+  { href: 'mailto:developeralade001@gmail.com', icon: 'fa-solid fa-envelope', label: 'Email' },
+  { href: 'https://github.com/Alade017', icon: 'fa-brands fa-github', label: 'GitHub', external: true },
   { href: 'https://linkedin.com/', icon: 'fa-brands fa-linkedin', label: 'LinkedIn', external: true },
-  { href: '#', icon: 'fa-regular fa-file', label: 'Resume' },
+  { href: '/img/Ibrahim_Abdulmalik_Frontend_Resume.pdf', icon: 'fa-regular fa-file', label: 'Resume', external: true },
   { href: 'https://wa.me/+2347013765182', icon: 'fa-brands fa-whatsapp', label: 'WhatsApp', external: true },
-  { href: '#', icon: 'fa-brands fa-x-twitter', label: 'X (Twitter)' },
+  { href: 'https://x.com/adeyemimalik207', icon: 'fa-brands fa-x-twitter', label: 'X (Twitter)', external: true },
 ];
 
 const skillGroups = [
@@ -53,53 +53,96 @@ const aboutFacts = [
 
 const projects = [
   {
-    href: 'https://chairlab.netlify.app/',
-    image: './img/project-img/design.jpg',
-    alt: 'a website for chair lab',
-    title: 'ChairLab storefront',
-    tag: 'E-commerce UX',
+    href: 'https://brooks-family-lawn-care.netlify.app/',
+    image: '/img/project-img/Brooks-lawn-care.jpg',
+    alt: 'a website for Brooks family lawn services',
+    title: 'Brooks lawn service',
+    tag: 'Marketing',
     className: 'featured-project',
   },
   {
+    href: 'https://alade017.github.io/linksync/',
+    image: '/img/project-img/linksync.png',
+    alt: 'a website for linking multiple account',
+    title: 'Lyncsync homepage',
+    tag: 'Product Homepage',
+    className:'',
+  }, 
+  {
+    href: 'https://alade2007.github.io/GlobeQuest/',
+    image: '/img/project-img/globequest_project.png',
+    alt: 'a travel website page picture',
+    title: 'Globequest homepage',
+    tag: 'Travels & Tours',
+    className:'',
+  },
+  {
+    href: 'https://alade017.github.io/renteasy/',
+    image: '/img/project-img/renteasy_project.jpg',
+    alt: 'a website for house renting packages',
+    title: 'Renteasy',
+    tag: 'E-commerce Site',
+    className:'',
+  },
+  {
+    href: 'https://basketballscorebanner.netlify.app/',
+    image: '/img/project-img/Basketball-score-Counter.jpg',
+    alt: 'a website for Basketball score counter board',
+    title: 'Basketball Scorebooard',
+    tag: 'Personal Growth',
+    className:'',
+  },
+ 
+  {
+    href: 'https://alade2007.github.io/bento_grid_challenge/',
+    image: '/img/project-img/bento_grid_project.jpg',
+    alt: 'a website for bento grid',
+    title: 'Bento grid challenge',
+    tag: 'Grid challenge layout',
+    className:'',
+  },
+  {
+    href: 'https://free-code-magazine.netlify.app/',
+    image: '/img/project-img/magazine.jpg',
+    alt: 'the blog magazine image',
+    title: 'Magazine blog layout',
+    tag: 'Content design',
+    className:'',
+  },
+
+  {
     href: 'https://nelsonmadela-tributepage.netlify.app/',
-    image: './img/project-img/tribute_page.jpg',
+    image: '/img/project-img/tribute_page.jpg',
     alt: 'a tribute page for nelson mandela image',
     title: 'Mandela tribute page',
     tag: 'Editorial design',
     className:'',
   },
   {
-    href: 'https://free-code-magazine.netlify.app/',
-    image: './img/project-img/magazine.jpg',
-    alt: 'the blog magazine image',
-    title: 'Magazine blog layout',
-    tag: 'Content design',
-    className:'',
-  },
-  {
-    href: 'https://dream-sweet.netlify.app/',
-    image: './img/project-img/dream_ei.jpg',
-    alt: 'a motivational landing page picture',
-    title: 'Dreamwise landing page',
-    tag: 'Brand storytelling',
-    className:'',
-  },
-  {
-    href: 'https://omnifood-mini-project.netlify.app/',
-    image: './img/project-img/ominifood_mini_project.jpg',
-    alt: 'omnifood mini project picture',
-    title: 'Omnifood concept',
-    tag: 'SaaS landing page',
+    href: 'https://chairlab.netlify.app/',
+    image: '/img/project-img/design.jpg',
+    alt: 'a website for chair lab',
+    title: 'ChairLab storefront',
+    tag: 'E-commerce UX',
     className:'',
   },
   {
     href: 'https://product-land-tech.netlify.app/',
-    image: './img/project-img/trombone_landing_page.jpg',
+    image: '/img/project-img/trombone_landing_page.jpg',
     alt: 'trombone landing page picture',
     title: 'Trombone product page',
     tag: 'Product marketing',
     className:'',
   },
+  {
+    href: 'https://omnifood-mini-project.netlify.app/',
+    image: '/img/project-img/ominifood_mini_project.jpg',
+    alt: 'omnifood mini project picture',
+    title: 'Omnifood concept',
+    tag: 'SaaS landing page',
+    className:'',
+  },
+  
 ];
 
 function App() {
@@ -134,7 +177,7 @@ function App() {
       <aside className="side-bar">
         <div>
           <figure className="info-header">
-            <img src="./img/my_picture.png" alt="picture of the developer" className="info-img" />
+            <img src="/img/my_picture.png" alt="picture of the developer" className="info-img" />
             <div className="info-text">
               <span>Ibrahim Abdulmalik</span>
               <p>Web designer</p>
@@ -207,7 +250,7 @@ function App() {
 
           <div className="hero-visual">
             <div className="visual-card card-main">
-              <img src="https://i.pinimg.com/736x/a7/00/9c/a7009ce495034c5e15571e8b0fdcf742.jpg" alt="Ibrahim Abdulmalik portrait" />
+              <img src="https://i.pinimg.com/736x/a7/00/9c/a7009ce495034c5e15571e8b0fdcf742.jpg" alt="A hand coding on a laptop" />
             </div>
             <div className="visual-card card-floating">
               <span>UI/UX</span>
@@ -225,7 +268,7 @@ function App() {
           <div className="about-layout">
             <div className="about-visual">
               <img
-                src="./img/my_picture.png"
+                src="/img/my_picture.png"
                 alt="Ibrahim Abdulmalik picture"
                 className="about-me-img"
                 loading="lazy"
