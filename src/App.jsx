@@ -1,4 +1,5 @@
 ﻿import { useEffect, useState } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const navLinks = [
   { href: '#home', icon: 'fa-solid fa-house', label: 'Home' },
@@ -381,6 +382,7 @@ function App() {
           </span>
         </footer>
       </main>
+      <SpeedInsights />
     </div>
   );
 }
