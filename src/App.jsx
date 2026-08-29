@@ -135,11 +135,11 @@ const projects = [
     className:'',
   },
   {
-    href: 'https://omnifood-mini-project.netlify.app/',
-    image: '/img/project-img/ominifood_mini_project.jpg',
-    alt: 'omnifood mini project picture',
-    title: 'Omnifood concept',
-    tag: 'SaaS landing page',
+    href: 'https://alade017.github.io/password-generator/',
+    image: '/img/project-img/Password-Generator.jpg',
+    alt: 'password generator mini project picture',
+    title: 'Password Generator',
+    tag: 'Mini project',
     className:'',
   },
   
@@ -250,7 +250,13 @@ function App() {
 
           <div className="hero-visual">
             <div className="visual-card card-main">
-              <img src="https://i.pinimg.com/736x/a7/00/9c/a7009ce495034c5e15571e8b0fdcf742.jpg" alt="A hand coding on a laptop" />
+              <img
+                src="https://plus.unsplash.com/premium_photo-1661331911412-330f2e99cf53?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YSUyMGhhbmQlMjBjb2Rpbmd8ZW58MHx8MHx8fDA%3D"
+                alt="A hand coding on a laptop"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+              />
             </div>
             <div className="visual-card card-floating">
               <span>UI/UX</span>
