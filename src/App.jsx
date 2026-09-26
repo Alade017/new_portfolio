@@ -12,7 +12,9 @@ const navLinks = [
 const socialLinks = [
   { href: 'mailto:developeralade001@gmail.com', icon: 'fa-solid fa-envelope', label: 'Email' },
   { href: 'https://github.com/Alade017', icon: 'fa-brands fa-github', label: 'GitHub', external: true },
-  { href: 'https://linkedin.com/', icon: 'fa-brands fa-linkedin', label: 'LinkedIn', external: true },
+  { href: 'https://www.linkedin.com/in/abdulmalik-ibrahim-668798397', icon: 'fa-brands fa-linkedin', label: 'LinkedIn', external: true },
+  { href: 'https://www.instagram.com/yhemyhardey', icon: 'fa-brands fa-instagram', label: 'Instagram', external: true },
+  { href: 'https://www.facebook.com/share/1ELd1Rfpuk/', icon: 'fa-brands fa-facebook', label: 'Facebook', external: true },
   { href: '/img/Ibrahim_Abdulmalik_Frontend_Resume.pdf', icon: 'fa-regular fa-file', label: 'Resume', external: true },
   { href: 'https://wa.me/+2347013765182', icon: 'fa-brands fa-whatsapp', label: 'WhatsApp', external: true },
   { href: 'https://x.com/adeyemimalik207', icon: 'fa-brands fa-x-twitter', label: 'X (Twitter)', external: true },
@@ -21,26 +23,32 @@ const socialLinks = [
 const skillGroups = [
   {
     title: 'Frontend development',
+    blurb: 'Building fast, accessible interfaces with modern web standards.',
+    featured: true,
     items: [
-      { icon: 'fab fa-html5', label: 'HTML', level: 'Semantic markup', tone: 'html' },
-      { icon: 'fab fa-css3-alt', label: 'CSS', level: 'Modern styling', tone: 'css' },
-      { icon: 'fab fa-js', label: 'JavaScript', level: 'Interactive logic', tone: 'js' },
-      { icon: 'fab fa-react', label: 'React.js', level: 'Component-based UI', tone: 'react' },
+      { icon: 'fab fa-html5', label: 'HTML', level: 'Semantic markup', tone: 'html', proficiency: 92 },
+      { icon: 'fab fa-css3-alt', label: 'CSS', level: 'Modern styling', tone: 'css', proficiency: 90 },
+      { icon: 'fab fa-js', label: 'JavaScript', level: 'Interactive logic', tone: 'js', proficiency: 82 },
+      { icon: 'fab fa-react', label: 'React.js', level: 'Component-based UI', tone: 'react', proficiency: 78 },
     ],
   },
   {
     title: 'Design & UX',
+    blurb: 'Designing layouts that feel clear, consistent, and easy to use.',
+    featured: false,
     items: [
-      { icon: 'fas fa-mobile-alt', label: 'Responsive Design', level: 'Mobile-first layouts', tone: 'responsive' },
-      { icon: 'fas fa-pen-ruler', label: 'UI/UX Design Fundamentals', level: 'User-focused thinking', tone: 'ux' },
-      { icon: 'fab fa-figma', label: 'Figma', level: 'Wireframes & prototypes', tone: 'figma' },
+      { icon: 'fas fa-mobile-alt', label: 'Responsive Design', level: 'Mobile-first layouts', tone: 'responsive', proficiency: 88 },
+      { icon: 'fas fa-pen-ruler', label: 'UI/UX Design', level: 'User-focused thinking', tone: 'ux', proficiency: 74 },
+      { icon: 'fab fa-figma', label: 'Figma', level: 'Wireframes & prototypes', tone: 'figma', proficiency: 72 },
     ],
   },
   {
     title: 'Workflow & deployment',
+    blurb: 'Shipping polished work with version control and production hosting.',
+    featured: false,
     items: [
-      { icon: 'fas fa-code-branch', label: 'Git & GitHub', level: 'Version control', tone: 'git' },
-      { icon: 'fas fa-cloud', label: 'Netlify/Vercel', level: 'Production deployment', tone: 'deploy' },
+      { icon: 'fas fa-code-branch', label: 'Git & GitHub', level: 'Version control', tone: 'git', proficiency: 80 },
+      { icon: 'fas fa-cloud', label: 'Netlify/Vercel', level: 'Production deployment', tone: 'deploy', proficiency: 76 },
     ],
   },
 ];
@@ -303,27 +311,48 @@ function App() {
         <section id="skills" className="skills-section reveal-on-scroll">
           <div className="section-heading">
             <span className="eyebrow">Skills &amp; technologies</span>
-            <h2>Modern tools for polished digital experiences</h2>
+            <h2>A focused stack for clean, production-ready interfaces</h2>
+            <p className="skills-lede">
+              From markup and motion to design systems and deployment, these are the tools I use to turn ideas into reliable web experiences.
+            </p>
           </div>
 
-          {skillGroups.map(({ title, items }) => (
-            <div className="skill-group" key={title}>
-              <h3>{title}</h3>
-              <div className="skills-list">
-                {items.map(({ icon, label, level, tone }) => (
-                  <div className={`skill-card ${tone}`} key={label}>
-                    <div className="skill-icon-wrap">
-                      <i className={icon}></i>
-                    </div>
-                    <div className="skill-copy">
-                      <span className="span-text">{label}</span>
-                      <small>{level}</small>
-                    </div>
+          <div className="skills-board">
+            {skillGroups.map(({ title, blurb, items, featured }, index) => (
+              <article className={`skill-track ${featured ? 'is-featured' : ''}`} key={title}>
+                <header className="skill-track-head">
+                  <span className="skill-track-index">{String(index + 1).padStart(2, '0')}</span>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{blurb}</p>
                   </div>
-                ))}
-              </div>
-            </div>
-          ))}
+                </header>
+                <div className={`skills-list ${featured ? 'is-bento' : 'is-row'}`}>
+                  {items.map(({ icon, label, level, tone, proficiency }) => (
+                    <div
+                      className={`skill-card ${tone}`}
+                      key={label}
+                      style={{ '--level': `${proficiency}%` }}
+                    >
+                      <div className="skill-card-top">
+                        <div className="skill-icon-wrap">
+                          <i className={icon}></i>
+                        </div>
+                        <span className="skill-score">{proficiency}%</span>
+                      </div>
+                      <div className="skill-copy">
+                        <span className="span-text">{label}</span>
+                        <small>{level}</small>
+                      </div>
+                      <div className="skill-meter" aria-hidden="true">
+                        <span></span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section id="projects" className="project-section">
