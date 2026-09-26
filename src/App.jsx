@@ -151,6 +151,14 @@ const projects = [
   
 ];
 
+/**
+ * @param {number} milliseconds
+ * @returns {import('react').CSSProperties & { '--reveal-delay': string }}
+ */
+function getRevealDelayStyle(milliseconds) {
+  return { '--reveal-delay': `${milliseconds}ms` };
+}
+
 function App() {
   const projectCount = projects.length;
   const [displayedProjectCount, setDisplayedProjectCount] = useState(0);
@@ -324,7 +332,7 @@ function App() {
                     className="fact-pill"
                     key={fact}
                     data-scroll-reveal
-                    style={{ '--reveal-delay': `${index * 60}ms` }}
+                    style={getRevealDelayStyle(index * 60)}
                   >
                     {fact}
                   </div>
@@ -349,7 +357,7 @@ function App() {
                 className={`skill-track ${featured ? 'is-featured' : ''}`}
                 key={title}
                 data-scroll-reveal
-                style={{ '--reveal-delay': `${index * 80}ms` }}
+                style={getRevealDelayStyle(index * 80)}
               >
                 <header className="skill-track-head">
                   <span className="skill-track-index">{String(index + 1).padStart(2, '0')}</span>
@@ -364,7 +372,7 @@ function App() {
                       className={`skill-card ${tone}`}
                       key={label}
                       data-scroll-reveal
-                      style={{ '--reveal-delay': `${itemIndex * 55}ms` }}
+                      style={getRevealDelayStyle(itemIndex * 55)}
                     >
                       <div className="skill-card-top">
                         <div className="skill-icon-wrap">
@@ -396,7 +404,7 @@ function App() {
                 key={title}
                 className="project-card"
                 data-scroll-reveal
-                style={{ '--reveal-delay': `${index * 55}ms` }}
+                style={getRevealDelayStyle(index * 55)}
               >
                 <figure className="project-img">
                   <a href={href} target="_blank" rel="noreferrer" aria-label={`View ${title}`}>

@@ -888,7 +888,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
   background: #0f172a;
   color: #cbd5e1;
   padding: 1.5rem 1rem;
@@ -897,7 +897,9 @@ footer {
 
 footer a {
   color: #7dd3fc;
-  text-decoration: none;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 footer a:hover {

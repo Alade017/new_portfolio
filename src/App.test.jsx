@@ -35,6 +35,10 @@ describe('App', () => {
     render(<App />);
 
     const skills = document.querySelector('#skills');
+    if (!(skills instanceof HTMLElement)) {
+      throw new Error('Skills section was not found');
+    }
+
     expect(within(skills).getAllByText('Beginner').length).toBeGreaterThan(0);
     expect(within(skills).getAllByText('Intermediate').length).toBeGreaterThan(0);
     expect(within(skills).getAllByText('Expert').length).toBeGreaterThan(0);
@@ -53,6 +57,10 @@ describe('App', () => {
     const { container } = render(<App />);
     const sidebar = container.querySelector('.side-bar');
     const contact = container.querySelector('#contact');
+
+    if (!(sidebar instanceof HTMLElement) || !(contact instanceof HTMLElement)) {
+      throw new Error('Sidebar or contact section was not found');
+    }
 
     for (const section of [sidebar, contact]) {
       expect(within(section).queryByRole('link', { name: /facebook|instagram/i })).not.toBeInTheDocument();
