@@ -777,21 +777,20 @@ section {
   --project-card-label: #945548;
 }
 
-.project-card:nth-child(3n + 1):not(.featured-project) {
+.project-card:nth-child(3n + 1) {
   --project-card-bg: #e8efe1;
   --project-card-ink: #203d2b;
   --project-card-label: #55733e;
 }
 
-.project-card:not(.featured-project) .project-img {
-  background: var(--project-card-bg);
+.project-card:first-child {
+  --project-card-bg: #18372a;
+  --project-card-ink: #fff;
+  --project-card-label: #c4e78b;
 }
 
-.featured-project .project-img {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(210px, 0.38fr);
-  min-height: 360px;
-  background: #18372a;
+.project-card .project-img {
+  background: var(--project-card-bg);
 }
 
 .project-img > a {
@@ -805,11 +804,6 @@ section {
   object-fit: cover;
   display: block;
   transition: transform 0.5s ease;
-}
-
-.project-img img {
-  height: 100%;
-  min-height: 360px;
 }
 
 .project-card:hover .project-img {
@@ -831,16 +825,9 @@ section {
   border-top: 1px solid rgba(31, 54, 43, 0.1);
 }
 
-.project-card:not(.featured-project) .link-desc {
+.project-card .link-desc {
   color: var(--project-card-ink);
   border-top-color: rgba(23, 59, 74, 0.12);
-}
-
-.featured-project .link-desc {
-  padding: 1.5rem;
-  background: #18372a;
-  color: #fff;
-  border-top: 0;
 }
 
 .link-desc span {
@@ -851,20 +838,10 @@ section {
   color: var(--project-card-label, #557665);
 }
 
-.featured-project .link-desc span {
-  color: #c4e78b;
-}
-
 .link-desc strong {
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--project-card-ink, #173126);
-}
-
-.featured-project .link-desc strong {
-  font-size: 1.65rem;
-  line-height: 1.2;
-  color: #fff;
 }
 
 /* CONTACT SECTION STYLING */
@@ -949,18 +926,6 @@ footer a:hover {
   .project-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .featured-project {
-    grid-column: span 2;
-  }
-
-  .featured-project .project-img {
-    min-height: 320px;
-  }
-
-  .featured-project .project-img img {
-    min-height: 320px;
-  }
 }
 
 @media (max-width: 900px) {
@@ -974,28 +939,6 @@ footer a:hover {
   .skills-list.is-row,
   .project-grid {
     grid-template-columns: 1fr;
-  }
-
-  .featured-project {
-    grid-column: auto;
-  }
-
-  .featured-project .project-img {
-    grid-template-columns: 1fr;
-    min-height: 0;
-  }
-
-  .featured-project .project-img img {
-    height: 260px;
-    min-height: 0;
-  }
-
-  .featured-project .link-desc {
-    padding: 1rem 1.05rem 1.15rem;
-  }
-
-  .featured-project .link-desc strong {
-    font-size: 1.2rem;
   }
 
   .nav-links a {

@@ -65,7 +65,6 @@ const projects = [
     alt: 'a website for Brooks family lawn services',
     title: 'Brooks lawn service',
     tag: 'Marketing',
-    className: 'featured-project',
   },
   {
     href: 'https://alade017.github.io/linksync/',
@@ -392,10 +391,10 @@ function App() {
           </div>
 
           <div className="project-grid">
-            {projects.map(({ href, image, alt, title, tag, className }, index) => (
+            {projects.map(({ href, image, alt, title, tag }, index) => (
               <div
                 key={title}
-                className={`project-card ${className}`}
+                className="project-card"
                 data-scroll-reveal
                 style={{ '--reveal-delay': `${index * 55}ms` }}
               >
