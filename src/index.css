@@ -466,8 +466,16 @@ section {
 
 #skills {
   background:
-    radial-gradient(circle at 12% 18%, rgba(34, 211, 238, 0.16), transparent 26%),
-    radial-gradient(circle at 88% 8%, rgba(99, 102, 241, 0.18), transparent 24%),
+    radial-gradient(
+      circle at 12% 18%,
+      rgba(34, 211, 238, 0.16),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 88% 8%,
+      rgba(99, 102, 241, 0.18),
+      transparent 24%
+    ),
     linear-gradient(160deg, #07111f 0%, #0f172a 48%, #111827 100%);
   color: #f8fafc;
   position: relative;
@@ -611,11 +619,28 @@ section {
   gap: 0.8rem;
 }
 
-.skill-score {
+.skill-level {
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(103, 232, 249, 0.24);
+  border-radius: 5px;
   font-size: 0.78rem;
   color: #67e8f9;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.skill-level.beginner {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.skill-level.intermediate {
+  color: #67e8f9;
+}
+
+.skill-level.expert {
+  color: #86efac;
+  border-color: rgba(134, 239, 172, 0.3);
 }
 
 .skill-icon-wrap {
@@ -649,21 +674,6 @@ section {
   color: #cbd5e1;
   font-size: 0.78rem;
   line-height: 1.5;
-}
-
-.skill-meter {
-  height: 5px;
-  border-radius: 999px;
-  overflow: hidden;
-  background: rgba(148, 163, 184, 0.16);
-}
-
-.skill-meter span {
-  display: block;
-  height: 100%;
-  width: var(--level, 70%);
-  border-radius: inherit;
-  background: linear-gradient(90deg, #22d3ee, #6366f1);
 }
 
 .skill-card.html .skill-icon-wrap {
@@ -714,25 +724,40 @@ section {
 /* PROJECTS STYLING SECTION */
 
 #projects {
-  background: linear-gradient(180deg, #f8fafc 0%, #edf2ff 100%);
+  --project-grid-size: clamp(24px, 3.2vw, 42px);
+  background-color: #edf2e8;
+  background-image:
+    linear-gradient(rgba(31, 54, 43, 0.065) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 54, 43, 0.065) 1px, transparent 1px),
+    radial-gradient(
+      ellipse at 12% 8%,
+      rgba(115, 166, 122, 0.17),
+      transparent 54%
+    ),
+    linear-gradient(135deg, #f3f6ed 0%, #e7efe7 100%);
+  background-size:
+    var(--project-grid-size) var(--project-grid-size),
+    var(--project-grid-size) var(--project-grid-size),
+    auto,
+    auto;
 }
 
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
+  gap: 1.15rem;
   max-width: 1100px;
   margin: 0 auto;
 }
 
 .project-img {
   height: 100%;
-  color: #eef2ff;
-  border-radius: 12px;
+  color: #173126;
+  border-radius: 5px;
   overflow: hidden;
   background: #fff;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(31, 54, 43, 0.14);
+  box-shadow: 0 12px 26px rgba(31, 54, 43, 0.08);
   transition:
     transform 0.35s ease,
     box-shadow 0.35s ease;
@@ -742,17 +767,56 @@ section {
   grid-column: span 2;
 }
 
+.project-card:nth-child(3n + 2) {
+  --project-card-bg: #e5f0f4;
+  --project-card-ink: #173b4a;
+  --project-card-label: #27657a;
+}
+
+.project-card:nth-child(3n + 3) {
+  --project-card-bg: #f5e9e5;
+  --project-card-ink: #512f2b;
+  --project-card-label: #945548;
+}
+
+.project-card:nth-child(3n + 1):not(.featured-project) {
+  --project-card-bg: #e8efe1;
+  --project-card-ink: #203d2b;
+  --project-card-label: #55733e;
+}
+
+.project-card:not(.featured-project) .project-img {
+  background: var(--project-card-bg);
+}
+
+.featured-project .project-img {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(210px, 0.38fr);
+  min-height: 360px;
+  background: #18372a;
+}
+
+.project-img > a {
+  display: block;
+  overflow: hidden;
+}
+
 .project-img img {
   width: 100%;
-  height: clamp(190px, 24vw, 260px);
+  height: clamp(180px, 19vw, 230px);
   object-fit: cover;
   display: block;
   transition: transform 0.5s ease;
 }
 
+.featured-project .project-img img {
+  height: 100%;
+  min-height: 360px;
+}
+
 .project-card:hover .project-img {
-  transform: translateY(-8px);
-  box-shadow: 0 30px 45px rgba(15, 23, 42, 0.12);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 36px rgba(31, 54, 43, 0.16);
 }
 
 .project-card:hover .project-img img {
@@ -762,28 +826,48 @@ section {
 .link-desc {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  padding: 1rem 1rem 1.1rem;
-  background: linear-gradient(
-    135deg,
-    rgba(15, 23, 42, 0.92),
-    rgba(30, 41, 59, 0.88)
-  );
-  color: #f8fafc;
-  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  gap: 0.55rem;
+  padding: 1rem 1.05rem 1.15rem;
+  background: var(--project-card-bg, #fff);
+  color: #173126;
+  border-top: 1px solid rgba(31, 54, 43, 0.1);
+}
+
+.project-card:not(.featured-project) .link-desc {
+  color: var(--project-card-ink);
+  border-top-color: rgba(23, 59, 74, 0.12);
+}
+
+.featured-project .link-desc {
+  justify-content: end;
+  padding: 1.5rem;
+  background: #18372a;
+  color: #fff;
+  border-top: 0;
 }
 
 .link-desc span {
   font-size: 0.72rem;
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #cbd5e1;
+  color: var(--project-card-label, #557665);
+}
+
+.featured-project .link-desc span {
+  color: #c4e78b;
 }
 
 .link-desc strong {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--project-card-ink, #173126);
+}
+
+.featured-project .link-desc strong {
+  font-size: 1.65rem;
+  line-height: 1.2;
+  color: #fff;
 }
 
 /* CONTACT SECTION STYLING */
@@ -872,6 +956,14 @@ footer a:hover {
   .featured-project {
     grid-column: span 2;
   }
+
+  .featured-project .project-img {
+    min-height: 320px;
+  }
+
+  .featured-project .project-img img {
+    min-height: 320px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -889,6 +981,24 @@ footer a:hover {
 
   .featured-project {
     grid-column: auto;
+  }
+
+  .featured-project .project-img {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .featured-project .project-img img {
+    height: 260px;
+    min-height: 0;
+  }
+
+  .featured-project .link-desc {
+    padding: 1rem 1.05rem 1.15rem;
+  }
+
+  .featured-project .link-desc strong {
+    font-size: 1.2rem;
   }
 
   .nav-links a {

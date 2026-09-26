@@ -30,4 +30,24 @@ describe('App', () => {
     expect(screen.getByText(/brooks lawn service/i)).toBeInTheDocument();
     expect(screen.getByText(/password generator/i)).toBeInTheDocument();
   });
+
+  it('shows descriptive skill ranks instead of percentage scores', () => {
+    render(<App />);
+
+    const skills = document.querySelector('#skills');
+    expect(within(skills).getAllByText('Beginner').length).toBeGreaterThan(0);
+    expect(within(skills).getAllByText('Intermediate').length).toBeGreaterThan(0);
+    expect(within(skills).getAllByText('Expert').length).toBeGreaterThan(0);
+    expect(within(skills).queryByText(/\d+%/)).not.toBeInTheDocument();
+  });
+
+  it('omits Facebook and Instagram links from visible social groups', () => {
+    const { container } = render(<App />);
+    const sidebar = container.querySelector('.side-bar');
+    const contact = container.querySelector('#contact');
+
+    for (const section of [sidebar, contact]) {
+      expect(within(section).queryByRole('link', { name: /facebook|instagram/i })).not.toBeInTheDocument();
+    }
+  });
 });

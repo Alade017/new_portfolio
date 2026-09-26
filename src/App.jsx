@@ -13,8 +13,6 @@ const socialLinks = [
   { href: 'mailto:developeralade001@gmail.com', icon: 'fa-solid fa-envelope', label: 'Email' },
   { href: 'https://github.com/Alade017', icon: 'fa-brands fa-github', label: 'GitHub', external: true },
   { href: 'https://www.linkedin.com/in/abdulmalik-ibrahim-668798397', icon: 'fa-brands fa-linkedin', label: 'LinkedIn', external: true },
-  { href: 'https://www.instagram.com/yhemyhardey', icon: 'fa-brands fa-instagram', label: 'Instagram', external: true },
-  { href: 'https://www.facebook.com/share/1ELd1Rfpuk/', icon: 'fa-brands fa-facebook', label: 'Facebook', external: true },
   { href: '/img/Ibrahim_Abdulmalik_Frontend_Resume.pdf', icon: 'fa-regular fa-file', label: 'Resume', external: true },
   { href: 'https://wa.me/+2347013765182', icon: 'fa-brands fa-whatsapp', label: 'WhatsApp', external: true },
   { href: 'https://x.com/adeyemimalik207', icon: 'fa-brands fa-x-twitter', label: 'X (Twitter)', external: true },
@@ -26,10 +24,10 @@ const skillGroups = [
     blurb: 'Building fast, accessible interfaces with modern web standards.',
     featured: true,
     items: [
-      { icon: 'fab fa-html5', label: 'HTML', level: 'Semantic markup', tone: 'html', proficiency: 92 },
-      { icon: 'fab fa-css3-alt', label: 'CSS', level: 'Modern styling', tone: 'css', proficiency: 90 },
-      { icon: 'fab fa-js', label: 'JavaScript', level: 'Interactive logic', tone: 'js', proficiency: 82 },
-      { icon: 'fab fa-react', label: 'React.js', level: 'Component-based UI', tone: 'react', proficiency: 78 },
+      { icon: 'fab fa-html5', label: 'HTML', summary: 'Semantic markup', rank: 'Expert', tone: 'html' },
+      { icon: 'fab fa-css3-alt', label: 'CSS', summary: 'Modern styling', rank: 'Expert', tone: 'css' },
+      { icon: 'fab fa-js', label: 'JavaScript', summary: 'Interactive logic', rank: 'Intermediate', tone: 'js' },
+      { icon: 'fab fa-react', label: 'React.js', summary: 'Component-based UI', rank: 'Intermediate', tone: 'react' },
     ],
   },
   {
@@ -37,9 +35,9 @@ const skillGroups = [
     blurb: 'Designing layouts that feel clear, consistent, and easy to use.',
     featured: false,
     items: [
-      { icon: 'fas fa-mobile-alt', label: 'Responsive Design', level: 'Mobile-first layouts', tone: 'responsive', proficiency: 88 },
-      { icon: 'fas fa-pen-ruler', label: 'UI/UX Design', level: 'User-focused thinking', tone: 'ux', proficiency: 74 },
-      { icon: 'fab fa-figma', label: 'Figma', level: 'Wireframes & prototypes', tone: 'figma', proficiency: 72 },
+      { icon: 'fas fa-mobile-alt', label: 'Responsive Design', summary: 'Mobile-first layouts', rank: 'Intermediate', tone: 'responsive' },
+      { icon: 'fas fa-pen-ruler', label: 'UI/UX Design', summary: 'User-focused thinking', rank: 'Beginner', tone: 'ux' },
+      { icon: 'fab fa-figma', label: 'Figma', summary: 'Wireframes & prototypes', rank: 'Beginner', tone: 'figma' },
     ],
   },
   {
@@ -47,8 +45,8 @@ const skillGroups = [
     blurb: 'Shipping polished work with version control and production hosting.',
     featured: false,
     items: [
-      { icon: 'fas fa-code-branch', label: 'Git & GitHub', level: 'Version control', tone: 'git', proficiency: 80 },
-      { icon: 'fas fa-cloud', label: 'Netlify/Vercel', level: 'Production deployment', tone: 'deploy', proficiency: 76 },
+      { icon: 'fas fa-code-branch', label: 'Git & GitHub', summary: 'Version control', rank: 'Intermediate', tone: 'git' },
+      { icon: 'fas fa-cloud', label: 'Netlify/Vercel', summary: 'Production deployment', rank: 'Intermediate', tone: 'deploy' },
     ],
   },
 ];
@@ -328,24 +326,17 @@ function App() {
                   </div>
                 </header>
                 <div className={`skills-list ${featured ? 'is-bento' : 'is-row'}`}>
-                  {items.map(({ icon, label, level, tone, proficiency }) => (
-                    <div
-                      className={`skill-card ${tone}`}
-                      key={label}
-                      style={{ '--level': `${proficiency}%` }}
-                    >
+                  {items.map(({ icon, label, summary, rank, tone }) => (
+                    <div className={`skill-card ${tone}`} key={label}>
                       <div className="skill-card-top">
                         <div className="skill-icon-wrap">
                           <i className={icon}></i>
                         </div>
-                        <span className="skill-score">{proficiency}%</span>
+                        <span className={`skill-level ${rank.toLowerCase()}`}>{rank}</span>
                       </div>
                       <div className="skill-copy">
                         <span className="span-text">{label}</span>
-                        <small>{level}</small>
-                      </div>
-                      <div className="skill-meter" aria-hidden="true">
-                        <span></span>
+                        <small>{summary}</small>
                       </div>
                     </div>
                   ))}
