@@ -41,6 +41,14 @@ describe('App', () => {
     expect(within(skills).queryByText(/\d+%/)).not.toBeInTheDocument();
   });
 
+  it('reveals page content when IntersectionObserver is unavailable', () => {
+    const { container } = render(<App />);
+    const revealTargets = container.querySelectorAll('[data-scroll-reveal]');
+
+    expect(revealTargets.length).toBeGreaterThan(0);
+    revealTargets.forEach((target) => expect(target).toHaveClass('is-visible'));
+  });
+
   it('omits Facebook and Instagram links from visible social groups', () => {
     const { container } = render(<App />);
     const sidebar = container.querySelector('.side-bar');

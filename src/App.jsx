@@ -179,6 +179,28 @@ function App() {
     return () => cancelAnimationFrame(animationFrame);
   }, [projectCount]);
 
+  useEffect(() => {
+    const revealTargets = document.querySelectorAll('[data-scroll-reveal]');
+
+    if (!('IntersectionObserver' in window)) {
+      revealTargets.forEach((target) => target.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, activeObserver) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          activeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
+
+    revealTargets.forEach((target) => observer.observe(target));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="container">
       <aside className="side-bar">
@@ -222,7 +244,7 @@ function App() {
 
       <main className="main-bar">
         <section id="home" className="hero-section">
-          <div className="hero-copy">
+          <div className="hero-copy" data-scroll-reveal>
             <span className="eyebrow">Available for freelance &amp; product work</span>
             <h1>Hi, i am Ibrahim Abdulmalik</h1>
             <h2>Website developer • Website designer • Graphics designer</h2>
@@ -255,7 +277,7 @@ function App() {
             </div>
           </div>
 
-          <div className="hero-visual">
+          <div className="hero-visual" data-scroll-reveal data-reveal-delay="120ms">
             <div className="visual-card card-main">
               <img
                 src="https://plus.unsplash.com/premium_photo-1661331911412-330f2e99cf53?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YSUyMGhhbmQlMjBjb2Rpbmd8ZW58MHx8MHx8fDA%3D"
@@ -273,13 +295,13 @@ function App() {
         </section>
 
         <section id="about_me" className="about-section">
-          <div className="section-header">
+          <div className="section-header" data-scroll-reveal>
             <span className="eyebrow">About me</span>
             <h2>Thoughtful design meets practical execution</h2>
           </div>
 
           <div className="about-layout">
-            <div className="about-visual">
+            <div className="about-visual" data-scroll-reveal>
               <img
                 src="/img/my_picture.png"
                 alt="Ibrahim Abdulmalik picture"
@@ -289,7 +311,7 @@ function App() {
               />
             </div>
 
-            <div className="about-copy">
+            <div className="about-copy" data-scroll-reveal data-reveal-delay="100ms">
                 <p className="img-desc">
                   Ibrahim Abdulmalik is a passionate front-end web developer and designer who enjoys turning ideas into modern, interactive digital experiences. He specializes in HTML, CSS, JavaScript and lot more, creating responsive websites that work smoothly across devices and feel polished to use. He is focused on building clean, efficient, and user-friendly interfaces, while also paying attention to accessibility, performance, and visual quality.
                 </p>
@@ -298,8 +320,15 @@ function App() {
                 </p>
 
               <div className="about-facts">
-                {aboutFacts.map((fact) => (
-                  <div className="fact-pill" key={fact}>{fact}</div>
+                {aboutFacts.map((fact, index) => (
+                  <div
+                    className="fact-pill"
+                    key={fact}
+                    data-scroll-reveal
+                    style={{ '--reveal-delay': `${index * 60}ms` }}
+                  >
+                    {fact}
+                  </div>
                 ))}
               </div>
             </div>
@@ -307,7 +336,7 @@ function App() {
         </section>
 
         <section id="skills" className="skills-section reveal-on-scroll">
-          <div className="section-heading">
+          <div className="section-heading" data-scroll-reveal>
             <span className="eyebrow">Skills &amp; technologies</span>
             <h2>A focused stack for clean, production-ready interfaces</h2>
             <p className="skills-lede">
@@ -317,7 +346,12 @@ function App() {
 
           <div className="skills-board">
             {skillGroups.map(({ title, blurb, items, featured }, index) => (
-              <article className={`skill-track ${featured ? 'is-featured' : ''}`} key={title}>
+              <article
+                className={`skill-track ${featured ? 'is-featured' : ''}`}
+                key={title}
+                data-scroll-reveal
+                style={{ '--reveal-delay': `${index * 80}ms` }}
+              >
                 <header className="skill-track-head">
                   <span className="skill-track-index">{String(index + 1).padStart(2, '0')}</span>
                   <div>
@@ -326,8 +360,13 @@ function App() {
                   </div>
                 </header>
                 <div className={`skills-list ${featured ? 'is-bento' : 'is-row'}`}>
-                  {items.map(({ icon, label, summary, rank, tone }) => (
-                    <div className={`skill-card ${tone}`} key={label}>
+                  {items.map(({ icon, label, summary, rank, tone }, itemIndex) => (
+                    <div
+                      className={`skill-card ${tone}`}
+                      key={label}
+                      data-scroll-reveal
+                      style={{ '--reveal-delay': `${itemIndex * 55}ms` }}
+                    >
                       <div className="skill-card-top">
                         <div className="skill-icon-wrap">
                           <i className={icon}></i>
@@ -347,14 +386,19 @@ function App() {
         </section>
 
         <section id="projects" className="project-section">
-          <div className="section-header">
+          <div className="section-header" data-scroll-reveal>
             <span className="eyebrow">Selected work</span>
             <h2>Projects built with clarity and purpose</h2>
           </div>
 
           <div className="project-grid">
-            {projects.map(({ href, image, alt, title, tag, className }) => (
-              <div key={title} className={`project-card ${className}`}>
+            {projects.map(({ href, image, alt, title, tag, className }, index) => (
+              <div
+                key={title}
+                className={`project-card ${className}`}
+                data-scroll-reveal
+                style={{ '--reveal-delay': `${index * 55}ms` }}
+              >
                 <figure className="project-img">
                   <a href={href} target="_blank" rel="noreferrer" aria-label={`View ${title}`}>
                     <img src={image} alt={alt} loading="lazy" decoding="async" />
@@ -370,7 +414,7 @@ function App() {
         </section>
 
         <section id="contact" className="contact-section">
-          <div className="contact-panel">
+          <div className="contact-panel" data-scroll-reveal>
             <div>
               <span className="eyebrow">Let’s work together</span>
               <h2>Need a website that looks sharp and works smoothly?</h2>
@@ -395,7 +439,7 @@ function App() {
           </div>
         </section>
 
-        <footer>
+        <footer data-scroll-reveal>
           <span>
             &copy; 2026 updated Ibrahim Abdulmalik Adeyemi portfolio website | Call me:{' '}
             <a href="callto:07013765182">+234 7013765182</a>
