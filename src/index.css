@@ -248,7 +248,7 @@ a {
 
 .hero-copy h1 {
   margin-top: 1rem;
-  font-size: clamp(2.7rem, 5vw, 4.5rem);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 .hero-copy h2 {
@@ -895,7 +895,7 @@ section {
 
 .contact-panel h2 {
   margin-top: 0.6rem;
-  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
 }
 
 .contact-panel p {
@@ -1291,7 +1291,7 @@ footer a:hover {
 .case-hero h1 {
   max-width: 900px;
   margin: 1.2rem 0 1rem;
-  font-size: clamp(2.6rem, 6vw, 5.5rem);
+  font-size: clamp(2.3rem, 4vw, 4.5rem);
   line-height: 1.03;
   font-weight: 300;
   overflow-wrap: anywhere;
@@ -1695,7 +1695,7 @@ footer nav a {
   }
 
   .hero-copy h1 {
-    font-size: clamp(2.45rem, 4.5vw, 3.7rem);
+    font-size: clamp(2.5rem, 4.5vw, 3.5rem);
   }
 
   .header-text {
