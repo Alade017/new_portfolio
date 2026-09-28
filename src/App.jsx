@@ -1,461 +1,85 @@
-﻿import { useEffect, useState } from 'react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Link, NavLink, Route, Routes, useLocation, useParams, useSearchParams } from 'react-router-dom';
 
-const navLinks = [
-  { href: '#home', icon: 'fa-solid fa-house', label: 'Home' },
-  { href: '#about_me', icon: 'fa-regular fa-user', label: 'About me' },
-  { href: '#skills', icon: 'fa-regular fa-file-code', label: 'Skills and technologies' },
-  { href: '#projects', icon: 'fa-solid fa-folder-open', label: 'Projects' },
-  { href: '#contact', icon: 'fa-solid fa-envelope', label: 'Contact' },
-];
-
-const socialLinks = [
+export const socialLinks = [
   { href: 'mailto:developeralade001@gmail.com', icon: 'fa-solid fa-envelope', label: 'Email' },
-  { href: 'https://github.com/Alade017', icon: 'fa-brands fa-github', label: 'GitHub', external: true },
-  { href: 'https://www.linkedin.com/in/abdulmalik-ibrahim-668798397', icon: 'fa-brands fa-linkedin', label: 'LinkedIn', external: true },
-  { href: '/img/Ibrahim_Abdulmalik_Frontend_Resume.pdf', icon: 'fa-regular fa-file', label: 'Resume', external: true },
-  { href: 'https://wa.me/+2347013765182', icon: 'fa-brands fa-whatsapp', label: 'WhatsApp', external: true },
-  { href: 'https://x.com/adeyemimalik207', icon: 'fa-brands fa-x-twitter', label: 'X (Twitter)', external: true },
+  { href: 'https://github.com/Alade017', icon: 'fa-brands fa-github', label: 'GitHub' },
+  { href: 'https://www.linkedin.com/in/abdulmalik-ibrahim-668798397', icon: 'fa-brands fa-linkedin', label: 'LinkedIn' },
+  { href: 'https://wa.me/2347013765182', icon: 'fa-brands fa-whatsapp', label: 'WhatsApp' },
+  { href: 'https://x.com/adeyemimalik207', icon: 'fa-brands fa-x-twitter', label: 'X (Twitter)' },
 ];
 
-const skillGroups = [
-  {
-    title: 'Frontend development',
-    blurb: 'Building fast, accessible interfaces with modern web standards.',
-    featured: true,
-    items: [
-      { icon: 'fab fa-html5', label: 'HTML', summary: 'Semantic markup', rank: 'Expert', tone: 'html' },
-      { icon: 'fab fa-css3-alt', label: 'CSS', summary: 'Modern styling', rank: 'Expert', tone: 'css' },
-      { icon: 'fab fa-js', label: 'JavaScript', summary: 'Interactive logic', rank: 'Intermediate', tone: 'js' },
-      { icon: 'fab fa-react', label: 'React.js', summary: 'Component-based UI', rank: 'Intermediate', tone: 'react' },
-    ],
-  },
-  {
-    title: 'Design & UX',
-    blurb: 'Designing layouts that feel clear, consistent, and easy to use.',
-    featured: false,
-    items: [
-      { icon: 'fas fa-mobile-alt', label: 'Responsive Design', summary: 'Mobile-first layouts', rank: 'Intermediate', tone: 'responsive' },
-      { icon: 'fas fa-pen-ruler', label: 'UI/UX Design', summary: 'User-focused thinking', rank: 'Beginner', tone: 'ux' },
-      { icon: 'fab fa-figma', label: 'Figma', summary: 'Wireframes & prototypes', rank: 'Beginner', tone: 'figma' },
-    ],
-  },
-  {
-    title: 'Workflow & deployment',
-    blurb: 'Shipping polished work with version control and production hosting.',
-    featured: false,
-    items: [
-      { icon: 'fas fa-code-branch', label: 'Git & GitHub', summary: 'Version control', rank: 'Intermediate', tone: 'git' },
-      { icon: 'fas fa-cloud', label: 'Netlify/Vercel', summary: 'Production deployment', rank: 'Intermediate', tone: 'deploy' },
-    ],
-  },
+export const projects = [
+  { slug: 'brooks-family-lawn-care', title: 'Brooks Family Lawn Care', category: 'Local Business Website', filterCategory: 'Business', type: 'business', image: '/img/project-img/Brooks-lawn-care.jpg', alt: 'Brooks Family Lawn Care website', description: 'A responsive website concept for a local lawn-care business, presenting services clearly and making it easy for customers to get in touch.', overview: 'A focused business website designed to give a local lawn-care service a professional online presence.', technologies: ['HTML', 'CSS', 'JavaScript'], liveUrl: 'https://brooks-family-lawn-care.netlify.app/' },
+  { slug: 'chairlab', title: 'ChairLab Storefront', category: 'E-commerce Website', filterCategory: 'E-commerce', type: 'ecommerce', image: '/img/project-img/design.jpg', alt: 'ChairLab storefront website', description: 'A product-led storefront concept with a clear browsing experience and a strong visual presentation.', overview: 'An e-commerce website concept focused on product discovery and a polished shopping experience.', technologies: ['HTML', 'CSS', 'JavaScript'], liveUrl: 'https://chairlab.netlify.app/' },
+  { slug: 'globequest', title: 'GlobeQuest', category: 'Travel Website', filterCategory: 'Other', type: 'other', image: '/img/project-img/globequest_project.png', alt: 'GlobeQuest travel website', description: 'A travel website interface built to make destinations and trip inspiration easy to explore.', overview: 'A travel experience concept with an inviting layout for browsing destinations and travel ideas.', technologies: ['HTML', 'CSS', 'JavaScript'], liveUrl: 'https://alade2007.github.io/GlobeQuest/' },
+  { slug: 'renteasy', title: 'RentEasy', category: 'Business Website', filterCategory: 'Business', type: 'business', image: '/img/project-img/renteasy_project.jpg', alt: 'RentEasy rental website', description: 'A rental marketplace interface for browsing available homes and rental options.', overview: 'A real-world product interface concept for presenting rental listings in a clear, approachable way.', technologies: ['HTML', 'CSS', 'JavaScript'], liveUrl: 'https://alade017.github.io/renteasy/' },
+  { slug: 'linksync', title: 'LinkSync Homepage', category: 'Landing Page', filterCategory: 'Landing Pages', type: 'landing', image: '/img/project-img/linksync.png', alt: 'LinkSync product homepage', description: 'A focused product homepage for a tool that brings multiple links together.', overview: 'A landing page concept that explains a digital product through a simple, focused visual hierarchy.', technologies: ['HTML', 'CSS', 'JavaScript'], liveUrl: 'https://alade017.github.io/linksync/' },
+  { slug: 'product-land', title: 'Trombone Product Page', category: 'Landing Page', filterCategory: 'Landing Pages', type: 'landing', image: '/img/project-img/trombone_landing_page.jpg', alt: 'Trombone product landing page', description: 'A product marketing page built around clear content, product value, and calls to action.', overview: 'A product landing page concept designed to guide visitors from discovery to action.', technologies: ['HTML', 'CSS', 'JavaScript'], liveUrl: 'https://product-land-tech.netlify.app/' },
+  { slug: 'magazine-blog', title: 'Magazine Blog Layout', category: 'Other', filterCategory: 'Other', type: 'other', image: '/img/project-img/magazine.jpg', alt: 'Magazine blog layout', description: 'An editorial layout concept for presenting articles and long-form content.', overview: 'A content-focused layout experiment for a magazine-style blog.', technologies: ['HTML', 'CSS'], liveUrl: 'https://free-code-magazine.netlify.app/' },
+  { slug: 'password-generator', title: 'Password Generator', category: 'Other', filterCategory: 'Other', type: 'other', image: '/img/project-img/Password-Generator.jpg', alt: 'Password generator interface', description: 'A small utility project exploring interactive form controls and generated output.', overview: 'A focused frontend exercise that demonstrates interactive JavaScript behavior.', technologies: ['HTML', 'CSS', 'JavaScript'], liveUrl: 'https://alade017.github.io/password-generator/' },
 ];
 
-const aboutFacts = [
-  'Responsive front-end experiences',
-  'Clean, maintainable code',
-  'Modern portfolio design systems',
-  'User-focused product thinking',
+const primaryProjects = projects.slice(0, 6);
+const navItems = [
+  { to: '/', label: 'Home', icon: 'fa-solid fa-house' },
+  { to: '/services', label: 'Services', icon: 'fa-solid fa-briefcase' },
+  { to: '/work', label: 'Work', icon: 'fa-solid fa-folder-open' },
+  { to: '/about', label: 'About', icon: 'fa-regular fa-user' },
+  { to: '/contact', label: 'Contact', icon: 'fa-solid fa-envelope' },
+];
+const skills = [
+  ['fab fa-html5', 'HTML', 'Semantic markup', 'html'], ['fab fa-css3-alt', 'CSS', 'Modern styling', 'css'],
+  ['fab fa-js', 'JavaScript', 'Interactive logic', 'js'], ['fab fa-react', 'React', 'Component-based UI', 'react'],
+  ['fas fa-mobile-alt', 'Responsive Design', 'Mobile-first layouts', 'responsive'], ['fab fa-figma', 'Figma', 'Wireframes and prototypes', 'figma'],
+  ['fas fa-code-branch', 'Git & GitHub', 'Version control', 'git'], ['fas fa-cloud', 'Netlify/Vercel', 'Production deployment', 'deploy'],
 ];
 
-const projects = [
-  {
-    href: 'https://brooks-family-lawn-care.netlify.app/',
-    image: '/img/project-img/Brooks-lawn-care.jpg',
-    alt: 'a website for Brooks family lawn services',
-    title: 'Brooks lawn service',
-    tag: 'Marketing',
-  },
-  {
-    href: 'https://alade017.github.io/linksync/',
-    image: '/img/project-img/linksync.png',
-    alt: 'a website for linking multiple account',
-    title: 'Lyncsync homepage',
-    tag: 'Product Homepage',
-    className:'',
-  }, 
-  {
-    href: 'https://alade2007.github.io/GlobeQuest/',
-    image: '/img/project-img/globequest_project.png',
-    alt: 'a travel website page picture',
-    title: 'Globequest homepage',
-    tag: 'Travels & Tours',
-    className:'',
-  },
-  {
-    href: 'https://alade017.github.io/renteasy/',
-    image: '/img/project-img/renteasy_project.jpg',
-    alt: 'a website for house renting packages',
-    title: 'Renteasy',
-    tag: 'E-commerce Site',
-    className:'',
-  },
-  {
-    href: 'https://basketballscorebanner.netlify.app/',
-    image: '/img/project-img/Basketball-score-Counter.jpg',
-    alt: 'a website for Basketball score counter board',
-    title: 'Basketball Scorebooard',
-    tag: 'Personal Growth',
-    className:'',
-  },
- 
-  {
-    href: 'https://alade2007.github.io/bento_grid_challenge/',
-    image: '/img/project-img/bento_grid_project.jpg',
-    alt: 'a website for bento grid',
-    title: 'Bento grid challenge',
-    tag: 'Grid challenge layout',
-    className:'',
-  },
-  {
-    href: 'https://free-code-magazine.netlify.app/',
-    image: '/img/project-img/magazine.jpg',
-    alt: 'the blog magazine image',
-    title: 'Magazine blog layout',
-    tag: 'Content design',
-    className:'',
-  },
-
-  {
-    href: 'https://nelsonmadela-tributepage.netlify.app/',
-    image: '/img/project-img/tribute_page.jpg',
-    alt: 'a tribute page for nelson mandela image',
-    title: 'Mandela tribute page',
-    tag: 'Editorial design',
-    className:'',
-  },
-  {
-    href: 'https://chairlab.netlify.app/',
-    image: '/img/project-img/design.jpg',
-    alt: 'a website for chair lab',
-    title: 'ChairLab storefront',
-    tag: 'E-commerce UX',
-    className:'',
-  },
-  {
-    href: 'https://product-land-tech.netlify.app/',
-    image: '/img/project-img/trombone_landing_page.jpg',
-    alt: 'trombone landing page picture',
-    title: 'Trombone product page',
-    tag: 'Product marketing',
-    className:'',
-  },
-  {
-    href: 'https://alade017.github.io/password-generator/',
-    image: '/img/project-img/Password-Generator.jpg',
-    alt: 'password generator mini project picture',
-    title: 'Password Generator',
-    tag: 'Mini project',
-    className:'',
-  },
-  
-];
-
-/**
- * @param {number} milliseconds
- * @returns {import('react').CSSProperties & { '--reveal-delay': string }}
- */
-function getRevealDelayStyle(milliseconds) {
-  return { '--reveal-delay': `${milliseconds}ms` };
-}
-
-function App() {
-  const projectCount = projects.length;
-  const [displayedProjectCount, setDisplayedProjectCount] = useState(0);
-
+function Reveal({ children, className = '', delay = 0 }) { return <div className={className} data-scroll-reveal style={{ '--reveal-delay': `${delay}ms` }}>{children}</div>; }
+function usePageEffects(title, description = 'Modern responsive websites for businesses, brands and entrepreneurs.') {
+  const location = useLocation();
   useEffect(() => {
-    const duration = 900;
-    const startTime = performance.now();
-    /**
-     * @type {number}
-     */
-    let animationFrame;
-
-    const updateProjectCount = (/** @type {number} */ currentTime) => {
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-      setDisplayedProjectCount(Math.floor(easedProgress * projectCount));
-
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(updateProjectCount);
-      }
-    };
-
-    animationFrame = requestAnimationFrame(updateProjectCount);
-
-    return () => cancelAnimationFrame(animationFrame);
-  }, [projectCount]);
-
-  useEffect(() => {
-    const revealTargets = document.querySelectorAll('[data-scroll-reveal]');
-
-    if (!('IntersectionObserver' in window)) {
-      revealTargets.forEach((target) => target.classList.add('is-visible'));
-      return;
-    }
-
-    const observer = new IntersectionObserver((entries, activeObserver) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          activeObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
-
-    revealTargets.forEach((target) => observer.observe(target));
-
+    document.title = `${title} | Malik Dev.`;
+    const descriptionTag = document.querySelector('meta[name="description"]');
+    if (descriptionTag) descriptionTag.setAttribute('content', description);
+    window.scrollTo(0, 0);
+    const targets = document.querySelectorAll('[data-scroll-reveal]');
+    if (!('IntersectionObserver' in window)) { targets.forEach((target) => target.classList.add('is-visible')); return undefined; }
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: 0.12 });
+    targets.forEach((target) => observer.observe(target));
     return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div className="container">
-      <aside className="side-bar">
-        <div>
-          <figure className="info-header">
-            <img src="/img/my_picture.png" alt="picture of the developer" className="info-img" />
-            <div className="info-text">
-              <span>Ibrahim Abdulmalik</span>
-              <p>Web designer</p>
-            </div>
-          </figure>
-        </div>
-
-        <nav className="nav-links" aria-label="Main navigation">
-          <ul className="nav-list">
-            {navLinks.map(({ href, icon, label }) => (
-              <li key={href}>
-                <a href={href} className="icons">
-                  <i className={icon}></i>
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="contact-footer">
-          {socialLinks.map(({ href, icon, label, external }) => (
-            <a
-              key={label}
-              href={href}
-              target={external ? '_blank' : undefined}
-              rel={external ? 'noreferrer' : undefined}
-              aria-label={label}
-            >
-              <i className={icon}></i>
-            </a>
-          ))}
-        </div>
-      </aside>
-
-      <main className="main-bar">
-        <section id="home" className="hero-section">
-          <div className="hero-copy" data-scroll-reveal>
-            <span className="eyebrow">Available for freelance &amp; product work</span>
-            <h1>Hi, i am Ibrahim Abdulmalik</h1>
-            <h2>Website developer • Website designer • Graphics designer</h2>
-            <p className="header-text">
-              Building ideas into experience, one line of code at a time.
-              <br />
-              Clean code. Clean vision.
-            </p>
-            <div className="hero-actions">
-              <a href="#projects" className="button-link primary">
-                View projects
-              </a>
-              <a href="#contact" className="button-link secondary">
-                Let’s talk
-              </a>
-            </div>
-            <div className="hero-stats">
-              <div>
-                <strong>2+</strong>
-                <span>Years building</span>
-              </div>
-              <div>
-                <strong>{displayedProjectCount >= 12 ? '12+' : displayedProjectCount}</strong>
-                <span>Projects available</span>
-              </div>
-              <div>
-                <strong>100%</strong>
-                <span>Detail-focused</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="hero-visual" data-scroll-reveal data-reveal-delay="120ms">
-            <div className="visual-card card-main">
-              <img
-                src="https://plus.unsplash.com/premium_photo-1661331911412-330f2e99cf53?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YSUyMGhhbmQlMjBjb2Rpbmd8ZW58MHx8MHx8fDA%3D"
-                alt="A hand coding on a laptop"
-                loading="eager"
-                decoding="async"
-                fetchPriority="high"
-              />
-            </div>
-            <div className="visual-card card-floating">
-              <span>UI/UX</span>
-              <strong>Front-end design</strong>
-            </div>
-          </div>
-        </section>
-
-        <section id="about_me" className="about-section">
-          <div className="section-header" data-scroll-reveal>
-            <span className="eyebrow">About me</span>
-            <h2>Thoughtful design meets practical execution</h2>
-          </div>
-
-          <div className="about-layout">
-            <div className="about-visual" data-scroll-reveal>
-              <img
-                src="/img/my_picture.png"
-                alt="Ibrahim Abdulmalik picture"
-                className="about-me-img"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-
-            <div className="about-copy" data-scroll-reveal data-reveal-delay="100ms">
-                <p className="img-desc">
-                  Ibrahim Abdulmalik is a passionate front-end web developer and designer who enjoys turning ideas into modern, interactive digital experiences. He specializes in HTML, CSS, JavaScript and lot more, creating responsive websites that work smoothly across devices and feel polished to use. He is focused on building clean, efficient, and user-friendly interfaces, while also paying attention to accessibility, performance, and visual quality.
-                </p>
-                <p className="img-desc">
-                  He enjoys the full creative process of web development from layout design and interface styling to adding functionality and refining the user experience. He is constantly learning, exploring new ideas, and improving his skills through real projects. His goal is to keep growing as a developer and build meaningful digital experiences that make an impact.
-                </p>
-
-              <div className="about-facts">
-                {aboutFacts.map((fact, index) => (
-                  <div
-                    className="fact-pill"
-                    key={fact}
-                    data-scroll-reveal
-                    style={getRevealDelayStyle(index * 60)}
-                  >
-                    {fact}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="skills" className="skills-section reveal-on-scroll">
-          <div className="section-heading" data-scroll-reveal>
-            <span className="eyebrow">Skills &amp; technologies</span>
-            <h2>A focused stack for clean, production-ready interfaces</h2>
-            <p className="skills-lede">
-              From markup and motion to design systems and deployment, these are the tools I use to turn ideas into reliable web experiences.
-            </p>
-          </div>
-
-          <div className="skills-board">
-            {skillGroups.map(({ title, blurb, items, featured }, index) => (
-              <article
-                className={`skill-track ${featured ? 'is-featured' : ''}`}
-                key={title}
-                data-scroll-reveal
-                style={getRevealDelayStyle(index * 80)}
-              >
-                <header className="skill-track-head">
-                  <span className="skill-track-index">{String(index + 1).padStart(2, '0')}</span>
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{blurb}</p>
-                  </div>
-                </header>
-                <div className={`skills-list ${featured ? 'is-bento' : 'is-row'}`}>
-                  {items.map(({ icon, label, summary, rank, tone }, itemIndex) => (
-                    <div
-                      className={`skill-card ${tone}`}
-                      key={label}
-                      data-scroll-reveal
-                      style={getRevealDelayStyle(itemIndex * 55)}
-                    >
-                      <div className="skill-card-top">
-                        <div className="skill-icon-wrap">
-                          <i className={icon}></i>
-                        </div>
-                        <span className={`skill-level ${rank.toLowerCase()}`}>{rank}</span>
-                      </div>
-                      <div className="skill-copy">
-                        <span className="span-text">{label}</span>
-                        <small>{summary}</small>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="projects" className="project-section">
-          <div className="section-header" data-scroll-reveal>
-            <span className="eyebrow">Selected work</span>
-            <h2>Projects built with clarity and purpose</h2>
-          </div>
-
-          <div className="project-grid">
-            {projects.map(({ href, image, alt, title, tag }, index) => (
-              <div
-                key={title}
-                className="project-card"
-                data-scroll-reveal
-                style={getRevealDelayStyle(index * 55)}
-              >
-                <figure className="project-img">
-                  <a href={href} target="_blank" rel="noreferrer" aria-label={`View ${title}`}>
-                    <img src={image} alt={alt} loading="lazy" decoding="async" />
-                  </a>
-                  <figcaption className="link-desc">
-                    <span>{tag}</span>
-                    <strong>{title}</strong>
-                  </figcaption>
-                </figure>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="contact" className="contact-section">
-          <div className="contact-panel" data-scroll-reveal>
-            <div>
-              <span className="eyebrow">Let’s work together</span>
-              <h2>Need a website that looks sharp and works smoothly?</h2>
-            </div>
-            <p>
-              Connect with me on social media or send a message. I’m open to new roles, freelance work, and group collaborations.
-            </p>
-
-            <div className="footer-contact">
-              {socialLinks.map(({ href, icon, label, external }) => (
-                <a
-                  key={`${label}-footer`}
-                  href={href}
-                  target={external ? '_blank' : undefined}
-                  rel={external ? 'noreferrer' : undefined}
-                  aria-label={label}
-                >
-                  <i className={icon}></i>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <footer data-scroll-reveal>
-          <span>
-            &copy; 2026 updated Ibrahim Abdulmalik Adeyemi portfolio website | Call me:{' '}
-            <a href="callto:07013765182">+234 7013765182</a>
-          </span>
-        </footer>
-      </main>
-      <SpeedInsights />
-    </div>
-  );
+  }, [location.pathname, title]);
 }
+function Layout({ children }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    const closeMenu = (event) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+    document.addEventListener('keydown', closeMenu);
+    return () => document.removeEventListener('keydown', closeMenu);
+  }, []);
+  return <div className="container"><aside className={`side-bar ${menuOpen ? 'is-open' : ''}`}><Link to="/" className="brand" onClick={() => setMenuOpen(false)}><img src="/img/my_picture.png" alt="Ibrahim Abdulmalik" /><span><strong>Malik Dev.</strong><small>Frontend Developer<br />Website Designer</small></span></Link><button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}><i className="fa-solid fa-bars" aria-hidden="true"></i><span>Menu</span></button><nav id="main-navigation" className="nav-links" aria-label="Main navigation"><ul>{navItems.map((item) => <li key={item.to}><NavLink to={item.to} end={item.to === '/'} onClick={() => setMenuOpen(false)}><i className={item.icon} aria-hidden="true"></i>{item.label}</NavLink></li>)}</ul><Link to="/contact" className="sidebar-cta" onClick={() => setMenuOpen(false)}>Get a Website <i className="fa-solid fa-arrow-right" aria-hidden="true"></i></Link></nav><div className="contact-footer">{socialLinks.map(({ href, icon, label }) => <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" aria-label={label}><i className={icon} aria-hidden="true"></i></a>)}</div></aside><main className="main-bar">{children}<Footer /></main></div>;
+}
+function Footer() { return <footer><div><strong>Malik Dev.</strong><span>Frontend Developer • Website Designer</span></div><nav aria-label="Footer navigation">{navItems.map(({ to, label }) => <Link key={to} to={to}>{label}</Link>)}<a href="https://ibrahimportfolio.name.ng/" target="_blank" rel="noreferrer">Portfolio</a></nav><small>© 2026 Ibrahim Abdulmalik Adeyemi</small></footer>; }
+function Eyebrow({ children }) { return <span className="eyebrow">{children}</span>; }
+function CTA({ children, to = '/contact', secondary = false }) { return <Link to={to} className={`button-link ${secondary ? 'secondary' : 'primary'}`}>{children} <i className="fa-solid fa-arrow-right" aria-hidden="true"></i></Link>; }
+function SectionIntro({ eyebrow, title, text }) { return <Reveal className="section-header"><Eyebrow>{eyebrow}</Eyebrow><h2>{title}</h2>{text && <p>{text}</p>}</Reveal>; }
+function ProjectCard({ project, index = 0 }) { return <Reveal className="project-card" delay={index * 55}><Link to={`/work/${project.slug}`} className="project-img"><img src={project.image} alt={project.alt} loading="lazy" /><span className="project-arrow"><i className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span></Link><div className="link-desc"><span>{project.category}</span><strong>{project.title}</strong><p>{project.description}</p><Link to={`/work/${project.slug}`} className="text-link">View Project <i className="fa-solid fa-arrow-right" aria-hidden="true"></i></Link></div></Reveal>; }
+
+function Home() { const homeServices = [['fa-solid fa-briefcase', 'Business Websites', 'Professional websites that showcase your business, services, location, contact details and brand.'], ['fa-solid fa-location-dot', 'Local Business Websites', 'Websites for barbershops, salons, restaurants, gyms, stores and other local businesses.'], ['fa-solid fa-bag-shopping', 'E-commerce Websites', 'Modern online shopping experiences for businesses selling products and services online.'], ['fa-solid fa-bullhorn', 'Landing Pages', 'Focused landing pages for products, campaigns, services and business promotions.']]; usePageEffects('Modern Websites for Businesses'); return <><section className="hero-section"><Reveal className="hero-copy"><Eyebrow>Available for freelance website projects</Eyebrow><h1>Modern Websites for Businesses That Want to Grow Online</h1><h2>Frontend Developer • Website Designer</h2><p className="header-text">I design and build responsive, modern websites for small businesses, brands, and entrepreneurs, helping customers discover your services, location, and contact information online.</p><div className="hero-actions"><CTA to="/work">View My Work</CTA><CTA to="/contact" secondary>Get a Website</CTA></div><div className="hero-stats"><div><strong>{projects.length}+</strong><span>Web projects</span></div><div><strong>React</strong><span>Development</span></div><div><strong>100%</strong><span>Responsive design</span></div></div></Reveal><Reveal className="hero-visual" delay={120}><div className="visual-card card-main"><img src="/img/blue_back_laptop.jpg" alt="Laptop ready for website design work" /></div><div className="visual-card card-floating"><span>Malik Dev.</span><strong>Websites that work for you</strong></div></Reveal></section><section className="light-section"><SectionIntro eyebrow="What I do" title="Websites Built Around Your Business" text="A clear, considered online presence that helps people understand what you offer and take the next step." /><div className="service-grid">{homeServices.map(([icon, title, text], index) => <Reveal className="service-card" key={title} delay={index * 60}><span className="service-icon"><i className={icon} aria-hidden="true"></i></span><h3>{title}</h3><p>{text}</p></Reveal>)}</div><div className="section-action"><CTA to="/services" secondary>View Services</CTA></div></section><section className="project-section"><SectionIntro eyebrow="Selected work" title="Websites for businesses, products and real-world use cases." text="A selection of projects that show how I approach responsive layouts, visual clarity and useful interactions." /><div className="project-grid">{primaryProjects.slice(0, 3).map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}</div><div className="section-action"><CTA to="/work" secondary>View All Work</CTA></div></section><AudienceSection /><ProcessSection /><AboutPreview /><ContactCTA /></>; }
+function AudienceSection() { const audiences = [['fa-solid fa-scissors', 'Barbers & Salons'], ['fa-solid fa-utensils', 'Restaurants'], ['fa-solid fa-dumbbell', 'Gyms & Fitness'], ['fa-solid fa-store', 'Small Businesses'], ['fa-solid fa-bag-shopping', 'Online Stores'], ['fa-solid fa-lightbulb', 'Startups & Entrepreneurs']]; return <section className="audience-section"><SectionIntro eyebrow="Who I build for" title="Websites for Businesses Like Yours" /><div className="audience-grid">{audiences.map(([icon, title], index) => <Reveal className="audience-item" key={title} delay={index * 45}><i className={icon} aria-hidden="true"></i><span>{title}</span></Reveal>)}</div></section>; }
+function ProcessSection() { return <section className="process-section"><SectionIntro eyebrow="How it works" title="A straightforward process from idea to launch." /><div className="process-grid">{[['01', 'Discuss', 'We discuss the business, goals, content and website requirements.'], ['02', 'Design', 'I create the website structure and visual direction.'], ['03', 'Build', 'I develop the responsive website and implement the required features.'], ['04', 'Launch', 'After review and approval, the website is prepared for deployment.']].map(([number, title, text]) => <Reveal className="process-step" key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></Reveal>)}</div></section>; }
+function AboutPreview() { return <section className="about-section"><div className="about-layout"><Reveal className="about-visual"><img src="/img/my_picture.png" alt="Ibrahim Abdulmalik" className="about-me-img" loading="lazy" /></Reveal><Reveal className="about-copy"><Eyebrow>About Malik Dev.</Eyebrow><h2>Thoughtful design meets practical execution.</h2><p>I'm Ibrahim Abdulmalik, a frontend web developer and website designer based in Nigeria. I build modern, responsive websites for businesses, brands and entrepreneurs.</p><p>I focus on clean interfaces that work well across phones, tablets and desktops while making it easy for customers to discover a business's services and get in touch.</p><CTA to="/about" secondary>More About Me</CTA></Reveal></div></section>; }
+function ContactCTA() { return <section className="contact-section"><Reveal className="contact-panel"><Eyebrow>Start a project</Eyebrow><h2>Ready to take your business online?</h2><p>Tell me about your business and the kind of website you need.</p><CTA>Let's Build Your Website</CTA></Reveal></section>; }
+
+function PageHero({ eyebrow, title, text }) { return <section className="page-hero"><Reveal><Eyebrow>{eyebrow}</Eyebrow><h1>{title}</h1><p>{text}</p></Reveal></section>; }
+function Services() { const serviceDetails = [['fa-solid fa-briefcase', 'Business Websites', 'Professional websites that make your business easy to understand and easy to contact.'], ['fa-solid fa-location-dot', 'Local Business Websites', 'Clear online homes for barbershops, salons, restaurants, gyms, stores and other local businesses.'], ['fa-solid fa-bag-shopping', 'E-commerce Websites', 'Product-led shopping experiences for businesses selling products or services online.'], ['fa-solid fa-bullhorn', 'Landing Pages', 'Focused pages for launches, promotions, campaigns and individual services.'], ['fa-solid fa-rotate', 'Website Redesign', 'A clearer, more current interface for an existing website that no longer represents your business.'], ['fa-solid fa-screwdriver-wrench', 'Website Maintenance', 'Practical updates and improvements to help keep your website useful and current.']]; usePageEffects('Services'); return <><PageHero eyebrow="Services" title="Web Design & Development" text="Professional websites designed around your business, your customers and the next step you want them to take." /><section className="light-section page-section"><div className="service-detail-grid">{serviceDetails.map(([icon, title, text], index) => <Reveal className="service-detail" key={title} delay={index * 45}><span className="service-icon"><i className={icon} aria-hidden="true"></i></span><small>0{index + 1}</small><h2>{title}</h2><p>{text}</p><CTA secondary>Discuss This Service</CTA></Reveal>)}</div></section><ProcessSection /><ContactCTA /></>; }
+export function Work() { const filterOptions = ['All', 'Business', 'E-commerce', 'Landing Pages', 'Other']; const [searchParams, setSearchParams] = useSearchParams(); const requestedFilter = searchParams.get('filter'); const validUrlFilter = filterOptions.includes(requestedFilter) ? requestedFilter : 'All'; const [activeFilter, setActiveFilter] = useState(validUrlFilter); useEffect(() => { setActiveFilter(validUrlFilter); if (requestedFilter && validUrlFilter === 'All') setSearchParams({}, { replace: true }); }, [requestedFilter, setSearchParams, validUrlFilter]); usePageEffects('Work'); const filteredProjects = activeFilter === 'All' ? projects : projects.filter((project) => project.filterCategory === activeFilter); const handleFilterChange = (nextFilter) => { setActiveFilter(nextFilter); setSearchParams(nextFilter === 'All' ? {} : { filter: nextFilter }); }; return <><PageHero eyebrow="Selected work" title="Websites built with clarity and purpose." text="A selection of websites and digital experiences designed for businesses, products and real-world use cases." /><section className="project-section work-page"><div className="filter-bar" aria-label="Project filters">{filterOptions.map((filterOption) => <button key={filterOption} className={activeFilter === filterOption ? 'active' : ''} type="button" onClick={() => handleFilterChange(filterOption)}>{filterOption}</button>)}</div><div className="project-grid">{filteredProjects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}</div></section></>; }
+function ProjectPage() { const { slug } = useParams(); const project = projects.find((item) => item.slug === slug); usePageEffects(project?.title || 'Project'); if (!project) return <PageHero eyebrow="Project not found" title="That project is unavailable." text="Return to the work page to browse the available projects." />; return <><section className="case-hero"><Reveal><Link to="/work" className="back-link"><i className="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Work</Link><Eyebrow>{project.category}</Eyebrow><h1>{project.title}</h1><p>{project.overview}</p></Reveal><Reveal className="case-image" delay={100}><img src={project.image} alt={project.alt} /></Reveal></section><section className="case-content"><Reveal><h2>Project Overview</h2><p>{project.description}</p><h2>What I Built</h2><ul><li>Responsive layout across devices</li><li>Clear content structure and calls to action</li><li>Accessible navigation and semantic structure</li><li>Visual direction suited to the project</li></ul></Reveal><Reveal className="case-aside" delay={80}><h2>Technologies</h2><div className="tech-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div><a className="button-link primary" href={project.liveUrl} target="_blank" rel="noreferrer">Visit Live Website <i className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></Reveal></section></>; }
+function About() { usePageEffects('About'); return <><PageHero eyebrow="About Malik Dev." title="A frontend developer focused on useful, polished websites." text="I'm Ibrahim Abdulmalik, a frontend web developer and website designer based in Nigeria." /><section className="about-section page-section"><div className="about-layout"><Reveal className="about-visual"><img src="/img/my_picture.png" alt="Ibrahim Abdulmalik" className="about-me-img" /></Reveal><Reveal className="about-copy"><h2>Building a better first impression online.</h2><p>I build modern, responsive websites for businesses, brands and entrepreneurs. My work is grounded in clear layouts, thoughtful visual details and interfaces that feel good to use.</p><p>I focus on creating clean interfaces that work across phones, tablets and desktops while making it easy for customers to discover a business's services and get in touch.</p><div className="hero-actions"><CTA to="/work">View My Work</CTA><CTA to="/contact" secondary>Start a Project</CTA></div></Reveal></div></section><SkillsSection /></>; }
+function SkillsSection() { return <section className="skills-section"><SectionIntro eyebrow="Tools & technologies" title="A focused stack for modern websites." text="The technologies I use to design and build responsive, maintainable interfaces." /><div className="skills-list">{skills.map(([icon, label, summary, tone]) => <Reveal className={`skill-card ${tone}`} key={label}><div className="skill-icon-wrap"><i className={icon} aria-hidden="true"></i></div><div><strong>{label}</strong><small>{summary}</small></div></Reveal>)}</div></section>; }
+function Contact() { const [sent, setSent] = useState(false); const [error, setError] = useState(''); usePageEffects('Contact'); const handleSubmit = (event) => { event.preventDefault(); const formData = new FormData(event.currentTarget); const name = String(formData.get('name') || '').trim(); const email = String(formData.get('email') || '').trim(); const details = String(formData.get('details') || '').trim(); if (!name || !email || !details) { setError('Please complete your name, email, and project details.'); return; } if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('Please enter a valid email address.'); return; } setError(''); const subject = encodeURIComponent(`Website project request from ${name}`); const body = encodeURIComponent([...formData.entries()].map(([key, value]) => `${key}: ${value}`).join('\n')); setSent(true); window.location.href = `mailto:developeralade001@gmail.com?subject=${subject}&body=${body}`; }; return <><PageHero eyebrow="Start a project" title="Ready to take your business online?" text="Tell me about your business and the kind of website you need. I'll get back to you with the next steps." /><section className="contact-page"><Reveal className="contact-form-wrap"><form onSubmit={handleSubmit}><div className="form-grid"><label>Name<input name="name" required aria-required="true" /></label><label>Business Name<input name="business" /></label><label>Email<input name="email" type="email" required aria-required="true" /></label><label>WhatsApp<input name="whatsapp" type="tel" /></label><label>Website Type<select name="type" defaultValue=""><option value="" disabled>Select an option</option><option>Business Website</option><option>Local Business Website</option><option>E-commerce Website</option><option>Landing Page</option><option>Website Redesign</option></select></label></div><label>Project Details<textarea name="details" rows="6" required aria-required="true" placeholder="Tell me a little about your goals, pages and timeline."></textarea></label><button className="button-link primary" type="submit">Send Project Request <i className="fa-solid fa-arrow-right" aria-hidden="true"></i></button>{error && <p className="form-error" role="alert">{error}</p>}{sent && <p className="form-success" role="status">Your email app should open with the project request ready to send. You can also use WhatsApp below.</p>}</form></Reveal><Reveal className="contact-details" delay={80}><h2>Prefer a direct conversation?</h2><p>Reach out through email or WhatsApp and tell me what you are looking to build.</p><a href="https://wa.me/2347013765182" target="_blank" rel="noreferrer" className="button-link secondary">Chat on WhatsApp <i className="fa-brands fa-whatsapp" aria-hidden="true"></i></a><a href="mailto:developeralade001@gmail.com" className="direct-link">developeralade001@gmail.com</a></Reveal></section></>; }
+function App() { return <BrowserRouter><Layout><Routes><Route path="/" element={<Home />} /><Route path="/services" element={<Services />} /><Route path="/work" element={<Work />} /><Route path="/work/:slug" element={<ProjectPage />} /><Route path="/about" element={<About />} /><Route path="/contact" element={<Contact />} /><Route path="*" element={<Home />} /></Routes></Layout></BrowserRouter>; }
 
 export default App;
