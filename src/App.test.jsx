@@ -18,7 +18,7 @@ describe('App', () => {
 
     expect(
       screen.getByRole('heading', {
-        name: /modern websites for businesses that want to grow online/i,
+        name: /i build digital experiences that make the web feel useful/i,
       })
     ).toBeInTheDocument();
   });
@@ -36,7 +36,7 @@ describe('App', () => {
   it('renders the selected work section with project cards', () => {
     render(<App />);
 
-    expect(screen.getByText(/websites built around your business/i)).toBeInTheDocument();
+    expect(screen.getByText(/design, code, and a lot of curiosity/i)).toBeInTheDocument();
     expect(screen.getByText(/brooks family lawn care/i)).toBeInTheDocument();
     expect(screen.queryByText(/password generator/i)).not.toBeInTheDocument();
   });
