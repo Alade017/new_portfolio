@@ -79,7 +79,60 @@ export function Work() { const filterOptions = ['All', 'Business', 'E-commerce',
 function ProjectPage() { const { slug } = useParams(); const project = projects.find((item) => item.slug === slug); usePageEffects(project?.title || 'Project'); if (!project) return <PageHero eyebrow="Project not found" title="That project is unavailable." text="Return to the work page to browse the available projects." />; return <><section className="case-hero"><Reveal><Link to="/work" className="back-link"><i className="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Work</Link><Eyebrow>{project.category}</Eyebrow><h1>{project.title}</h1><p>{project.overview}</p></Reveal><Reveal className="case-image" delay={100}><img src={project.image} alt={project.alt} /></Reveal></section><section className="case-content"><Reveal><h2>Project Overview</h2><p>{project.description}</p><h2>What I Built</h2><ul><li>Responsive layout across devices</li><li>Clear content structure and calls to action</li><li>Accessible navigation and semantic structure</li><li>Visual direction suited to the project</li></ul></Reveal><Reveal className="case-aside" delay={80}><h2>Technologies</h2><div className="tech-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div><a className="button-link primary" href={project.liveUrl} target="_blank" rel="noreferrer">Visit Live Website <i className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></Reveal></section></>; }
 function About() { usePageEffects('About'); return <><PageHero eyebrow="About Malik Dev." title="A frontend developer focused on useful, polished websites." text="I'm Ibrahim Abdulmalik, a frontend web developer and website designer based in Nigeria." /><section className="about-section page-section"><div className="about-layout"><Reveal className="about-visual"><img src="/img/my_picture.png" alt="Ibrahim Abdulmalik" className="about-me-img" /></Reveal><Reveal className="about-copy"><h2>Building a better first impression online.</h2><p>I build modern, responsive websites for businesses, brands and entrepreneurs. My work is grounded in clear layouts, thoughtful visual details and interfaces that feel good to use.</p><p>I focus on creating clean interfaces that work across phones, tablets and desktops while making it easy for customers to discover a business's services and get in touch.</p><div className="hero-actions"><CTA to="/work">View My Work</CTA><CTA to="/contact" secondary>Start a Project</CTA></div></Reveal></div></section><SkillsSection /></>; }
 function SkillsSection() { return <section className="skills-section"><SectionIntro eyebrow="Tools & technologies" title="A focused stack for modern websites." text="The technologies I use to design and build responsive, maintainable interfaces." /><div className="skills-list">{skills.map(([icon, label, summary, tone]) => <Reveal className={`skill-card ${tone}`} key={label}><div className="skill-icon-wrap"><i className={icon} aria-hidden="true"></i></div><div><strong>{label}</strong><small>{summary}</small></div></Reveal>)}</div></section>; }
-function Contact() { const [sent, setSent] = useState(false); const [error, setError] = useState(''); usePageEffects('Contact'); const handleSubmit = (event) => { event.preventDefault(); const formData = new FormData(event.currentTarget); const name = String(formData.get('name') || '').trim(); const email = String(formData.get('email') || '').trim(); const details = String(formData.get('details') || '').trim(); if (!name || !email || !details) { setError('Please complete your name, email, and project details.'); return; } if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('Please enter a valid email address.'); return; } setError(''); const subject = encodeURIComponent(`Website project request from ${name}`); const body = encodeURIComponent([...formData.entries()].map(([key, value]) => `${key}: ${value}`).join('\n')); setSent(true); window.location.href = `mailto:developeralade001@gmail.com?subject=${subject}&body=${body}`; }; return <><PageHero eyebrow="Start a project" title="Ready to take your business online?" text="Tell me about your business and the kind of website you need. I'll get back to you with the next steps." /><section className="contact-page"><Reveal className="contact-form-wrap"><form onSubmit={handleSubmit}><div className="form-grid"><label>Name<input name="name" required aria-required="true" /></label><label>Business Name<input name="business" /></label><label>Email<input name="email" type="email" required aria-required="true" /></label><label>WhatsApp<input name="whatsapp" type="tel" /></label><label>Website Type<select name="type" defaultValue=""><option value="" disabled>Select an option</option><option>Business Website</option><option>Local Business Website</option><option>E-commerce Website</option><option>Landing Page</option><option>Website Redesign</option></select></label></div><label>Project Details<textarea name="details" rows="6" required aria-required="true" placeholder="Tell me a little about your goals, pages and timeline."></textarea></label><button className="button-link primary" type="submit">Send Project Request <i className="fa-solid fa-arrow-right" aria-hidden="true"></i></button>{error && <p className="form-error" role="alert">{error}</p>}{sent && <p className="form-success" role="status">Your email app should open with the project request ready to send. You can also use WhatsApp below.</p>}</form></Reveal><Reveal className="contact-details" delay={80}><h2>Prefer a direct conversation?</h2><p>Reach out through email or WhatsApp and tell me what you are looking to build.</p><a href="https://wa.me/2347013765182" target="_blank" rel="noreferrer" className="button-link secondary">Chat on WhatsApp <i className="fa-brands fa-whatsapp" aria-hidden="true"></i></a><a href="mailto:developeralade001@gmail.com" className="direct-link">developeralade001@gmail.com</a></Reveal></section></>; }
+function Contact() {
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState('');
+  usePageEffects('Contact');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const name = String(formData.get('name') || '').trim();
+    const email = String(formData.get('email') || '').trim();
+    const details = String(formData.get('details') || '').trim();
+
+    if (!name || !email || !details) {
+      setError('Please complete your name, email, and project details.');
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
+    setError('');
+    const subject = encodeURIComponent(`Website project request from ${name}`);
+    const body = encodeURIComponent([...formData.entries()].map(([key, value]) => `${key}: ${value}`).join('\n'));
+    setSent(true);
+    window.location.href = `mailto:developeralade001@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  return (
+    <section className="contact-page direct-contact-page">
+      <Reveal className="direct-contact-card">
+        <h2>Prefer a direct conversation?</h2>
+        <p>Reach out through email or WhatsApp and tell me what you are looking to build.</p>
+
+        <a
+          className="whatsapp-link"
+          href="https://wa.me/2347013765182"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Chat on WhatsApp
+          <span className="whatsapp-icon" aria-hidden="true">
+            <i className="fa-brands fa-whatsapp" />
+          </span>
+        </a>
+
+        <a className="direct-email" href="mailto:developeralade001@gmail.com">
+          developeralade001@gmail.com
+        </a>
+      </Reveal>
+    </section>
+  );
+}
 function App() { return <BrowserRouter><Layout><Routes><Route path="/" element={<Home />} /><Route path="/services" element={<Services />} /><Route path="/work" element={<Work />} /><Route path="/work/:slug" element={<ProjectPage />} /><Route path="/about" element={<About />} /><Route path="/contact" element={<Contact />} /><Route path="*" element={<Home />} /></Routes></Layout></BrowserRouter>; }
 
 export default App;
