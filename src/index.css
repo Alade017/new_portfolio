@@ -224,6 +224,11 @@ a {
   min-width: 0;
 }
 
+.hero-copy h2,
+.hero-copy .header-text {
+  display: none;
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
