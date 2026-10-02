@@ -101,7 +101,6 @@ function App() {
         <section id="home" className="hero-section">
           <div className="hero-copy" data-scroll-reveal>
             <span className="eyebrow">Junior Frontend Developer • Open to opportunities</span>
-            <h1>Ibrahim Abdulmalik</h1>
             <h2>Building responsive web experiences with React, JavaScript, and user-first design.</h2>
             <p className="header-text">
               I create clean, fast, and conversion-focused interfaces for businesses, startups, and digital products.
