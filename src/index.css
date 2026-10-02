@@ -197,7 +197,7 @@ a {
 }
 
 .main-bar {
-  overflow-y: auto;
+  overflow: hidden;
   z-index: 2;
 }
 
@@ -224,11 +224,6 @@ a {
   min-width: 0;
 }
 
-.hero-copy h2,
-.hero-copy .header-text {
-  display: none;
-}
-
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -236,7 +231,7 @@ a {
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.25);
   background-color: rgba(17, 24, 39, 0.8);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgb(165, 243, 252);
@@ -253,20 +248,43 @@ a {
 
 .hero-copy h1 {
   margin-top: 1rem;
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: clamp(2.6rem, 5vw, 4.1rem);
+  letter-spacing: -0.05em;
 }
 
 .hero-copy h2 {
   margin-top: 0.8rem;
-  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  max-width: 680px;
+  font-size: clamp(1.15rem, 2vw, 1.65rem);
   color: #dbeafe;
+  line-height: 1.5;
 }
 
 .header-text {
   margin: 1.5rem 0 0;
+  max-width: 660px;
   color: #dbeafe;
-  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  font-size: clamp(1.05rem, 1.7vw, 1.35rem);
   line-height: 1.7;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+}
+
+.hero-badges span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: #e2e8f0;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
 }
 
 .hero-actions {

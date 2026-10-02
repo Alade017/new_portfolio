@@ -100,22 +100,31 @@ function App() {
       <main className="main-bar">
         <section id="home" className="hero-section">
           <div className="hero-copy" data-scroll-reveal>
-            <span className="eyebrow">Open to frontend opportunities</span>
+            <span className="eyebrow">Frontend Developer • Open to opportunities</span>
             <h1>Ibrahim Abdulmalik</h1>
-            <h2>Frontend Developer • React • Responsive UI • User Experience</h2>
+            <h2>Building responsive web experiences with React, JavaScript, and user-first design.</h2>
             <p className="header-text">
-              I build modern, responsive web experiences that are fast, accessible, and focused on real user value.
+              I create clean, fast, and conversion-focused interfaces for businesses, startups, and digital products.
               <br />
-              Clean code, thoughtful design, and practical product thinking.
+              My work blends frontend development, UI clarity, and practical product thinking to deliver experiences that look sharp and perform well.
             </p>
+
+            <div className="hero-badges" aria-label="Core frontend skills">
+              <span>React</span>
+              <span>JavaScript</span>
+              <span>Responsive UI</span>
+              <span>Accessibility</span>
+            </div>
+
             <div className="hero-actions">
               <a href="#projects" className="button-link primary">
                 View projects
               </a>
               <a href="#contact" className="button-link secondary">
-                Let’s talk
+                Hire me
               </a>
             </div>
+
             <div className="hero-stats">
               <div>
                 <strong>2+</strong>
@@ -123,7 +132,7 @@ function App() {
               </div>
               <div>
                 <strong>{displayedProjectCount >= 12 ? '12+' : displayedProjectCount}</strong>
-                <span>Projects available</span>
+                <span>Projects shipped</span>
               </div>
               <div>
                 <strong>100%</strong>
