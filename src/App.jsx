@@ -17,12 +17,9 @@ function App() {
   useEffect(() => {
     const duration = 900;
     const startTime = performance.now();
-    /**
-     * @type {number}
-     */
     let animationFrame;
 
-    const updateProjectCount = (/** @type {number} */ currentTime) => {
+    const updateProjectCount = (currentTime) => {
       const progress = Math.min((currentTime - startTime) / duration, 1);
       const easedProgress = 1 - Math.pow(1 - progress, 3);
       setDisplayedProjectCount(Math.floor(easedProgress * projectCount));
@@ -170,12 +167,12 @@ function App() {
             </div>
 
             <div className="about-copy" data-scroll-reveal data-reveal-delay="100ms">
-                <p className="img-desc">
-                  I am a front-end developer focused on creating responsive, accessible, and visually polished web experiences. I work with HTML, CSS, JavaScript, and React to turn ideas into clean interfaces that feel intuitive and perform well across devices.
-                </p>
-                <p className="img-desc">
-                  I enjoy the full product cycle—from layout and styling to interaction and refinement—while keeping user experience, performance, and maintainability at the center. I am actively growing my skills and looking for opportunities to contribute to meaningful digital products.
-                </p>
+              <p className="img-desc">
+                I am a front-end developer focused on creating responsive, accessible, and visually polished web experiences. I work with HTML, CSS, JavaScript, and React to turn ideas into clean interfaces that feel intuitive and perform well across devices.
+              </p>
+              <p className="img-desc">
+                I enjoy the full product cycle—from layout and styling to interaction and refinement—while keeping user experience, performance, and maintainability at the center. I am actively growing my skills and looking for opportunities to contribute to meaningful digital products.
+              </p>
 
               <div className="about-facts">
                 {aboutFacts.map((fact, index) => (
@@ -299,7 +296,7 @@ function App() {
 
         <footer data-scroll-reveal>
           <span>
-            &copy; 2026 updated Ibrahim Abdulmalik Adeyemi portfolio website | Call me:{' '}
+            &copy; 2026 Ibrahim Abdulmalik Adeyemi portfolio website | Call me:{' '}
             <a href="callto:07013765182">+234 7013765182</a>
           </span>
         </footer>
