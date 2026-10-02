@@ -1,155 +1,6 @@
 ﻿import { useEffect, useState } from 'react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
-
-const navLinks = [
-  { href: '#home', icon: 'fa-solid fa-house', label: 'Home' },
-  { href: '#about_me', icon: 'fa-regular fa-user', label: 'About me' },
-  { href: '#skills', icon: 'fa-regular fa-file-code', label: 'Skills and technologies' },
-  { href: '#projects', icon: 'fa-solid fa-folder-open', label: 'Projects' },
-  { href: '#contact', icon: 'fa-solid fa-envelope', label: 'Contact' },
-];
-
-const socialLinks = [
-  { href: 'mailto:developeralade001@gmail.com', icon: 'fa-solid fa-envelope', label: 'Email' },
-  { href: 'https://github.com/Alade017', icon: 'fa-brands fa-github', label: 'GitHub', external: true },
-  { href: 'https://www.linkedin.com/in/abdulmalik-ibrahim-668798397', icon: 'fa-brands fa-linkedin', label: 'LinkedIn', external: true },
-  { href: '/img/Ibrahim_Abdulmalik_Frontend_Resume.pdf', icon: 'fa-regular fa-file', label: 'Resume', external: true },
-  { href: 'https://wa.me/+2347013765182', icon: 'fa-brands fa-whatsapp', label: 'WhatsApp', external: true },
-  { href: 'https://x.com/adeyemimalik207', icon: 'fa-brands fa-x-twitter', label: 'X (Twitter)', external: true },
-];
-
-const skillGroups = [
-  {
-    title: 'Frontend development',
-    blurb: 'Building fast, accessible interfaces with modern web standards.',
-    featured: true,
-    items: [
-      { icon: 'fab fa-html5', label: 'HTML', summary: 'Semantic markup', rank: 'Expert', tone: 'html' },
-      { icon: 'fab fa-css3-alt', label: 'CSS', summary: 'Modern styling', rank: 'Expert', tone: 'css' },
-      { icon: 'fab fa-js', label: 'JavaScript', summary: 'Interactive logic', rank: 'Intermediate', tone: 'js' },
-      { icon: 'fab fa-react', label: 'React.js', summary: 'Component-based UI', rank: 'Intermediate', tone: 'react' },
-    ],
-  },
-  {
-    title: 'Design & UX',
-    blurb: 'Designing layouts that feel clear, consistent, and easy to use.',
-    featured: false,
-    items: [
-      { icon: 'fas fa-mobile-alt', label: 'Responsive Design', summary: 'Mobile-first layouts', rank: 'Intermediate', tone: 'responsive' },
-      { icon: 'fas fa-pen-ruler', label: 'UI/UX Design', summary: 'User-focused thinking', rank: 'Beginner', tone: 'ux' },
-      { icon: 'fab fa-figma', label: 'Figma', summary: 'Wireframes & prototypes', rank: 'Beginner', tone: 'figma' },
-    ],
-  },
-  {
-    title: 'Workflow & deployment',
-    blurb: 'Shipping polished work with version control and production hosting.',
-    featured: false,
-    items: [
-      { icon: 'fas fa-code-branch', label: 'Git & GitHub', summary: 'Version control', rank: 'Intermediate', tone: 'git' },
-      { icon: 'fas fa-cloud', label: 'Netlify/Vercel', summary: 'Production deployment', rank: 'Intermediate', tone: 'deploy' },
-    ],
-  },
-];
-
-const aboutFacts = [
-  'Responsive front-end experiences',
-  'Clean, maintainable code',
-  'Modern portfolio design systems',
-  'User-focused product thinking',
-];
-
-const projects = [
-  {
-    href: 'https://brooks-family-lawn-care.netlify.app/',
-    image: '/img/project-img/Brooks-lawn-care.jpg',
-    alt: 'a website for Brooks family lawn services',
-    title: 'Brooks lawn service',
-    tag: 'Marketing',
-  },
-  {
-    href: 'https://alade017.github.io/linksync/',
-    image: '/img/project-img/linksync.png',
-    alt: 'a website for linking multiple account',
-    title: 'Lyncsync homepage',
-    tag: 'Product Homepage',
-    className:'',
-  }, 
-  {
-    href: 'https://alade2007.github.io/GlobeQuest/',
-    image: '/img/project-img/globequest_project.png',
-    alt: 'a travel website page picture',
-    title: 'Globequest homepage',
-    tag: 'Travels & Tours',
-    className:'',
-  },
-  {
-    href: 'https://alade017.github.io/renteasy/',
-    image: '/img/project-img/renteasy_project.jpg',
-    alt: 'a website for house renting packages',
-    title: 'Renteasy',
-    tag: 'E-commerce Site',
-    className:'',
-  },
-  {
-    href: 'https://basketballscorebanner.netlify.app/',
-    image: '/img/project-img/Basketball-score-Counter.jpg',
-    alt: 'a website for Basketball score counter board',
-    title: 'Basketball Scorebooard',
-    tag: 'Personal Growth',
-    className:'',
-  },
- 
-  {
-    href: 'https://alade2007.github.io/bento_grid_challenge/',
-    image: '/img/project-img/bento_grid_project.jpg',
-    alt: 'a website for bento grid',
-    title: 'Bento grid challenge',
-    tag: 'Grid challenge layout',
-    className:'',
-  },
-  {
-    href: 'https://free-code-magazine.netlify.app/',
-    image: '/img/project-img/magazine.jpg',
-    alt: 'the blog magazine image',
-    title: 'Magazine blog layout',
-    tag: 'Content design',
-    className:'',
-  },
-
-  {
-    href: 'https://nelsonmadela-tributepage.netlify.app/',
-    image: '/img/project-img/tribute_page.jpg',
-    alt: 'a tribute page for nelson mandela image',
-    title: 'Mandela tribute page',
-    tag: 'Editorial design',
-    className:'',
-  },
-  {
-    href: 'https://chairlab.netlify.app/',
-    image: '/img/project-img/design.jpg',
-    alt: 'a website for chair lab',
-    title: 'ChairLab storefront',
-    tag: 'E-commerce UX',
-    className:'',
-  },
-  {
-    href: 'https://product-land-tech.netlify.app/',
-    image: '/img/project-img/trombone_landing_page.jpg',
-    alt: 'trombone landing page picture',
-    title: 'Trombone product page',
-    tag: 'Product marketing',
-    className:'',
-  },
-  {
-    href: 'https://alade017.github.io/password-generator/',
-    image: '/img/project-img/Password-Generator.jpg',
-    alt: 'password generator mini project picture',
-    title: 'Password Generator',
-    tag: 'Mini project',
-    className:'',
-  },
-  
-];
+import { aboutFacts, navLinks, projects, skillGroups, socialLinks } from './portfolioData';
 
 /**
  * @param {number} milliseconds
@@ -216,7 +67,7 @@ function App() {
             <img src="/img/my_picture.png" alt="picture of the developer" className="info-img" />
             <div className="info-text">
               <span>Ibrahim Abdulmalik</span>
-              <p>Web designer</p>
+              <p>Frontend Developer</p>
             </div>
           </figure>
         </div>
@@ -252,13 +103,13 @@ function App() {
       <main className="main-bar">
         <section id="home" className="hero-section">
           <div className="hero-copy" data-scroll-reveal>
-            <span className="eyebrow">Available for freelance &amp; product work</span>
-            <h1>Hi, i am Ibrahim Abdulmalik</h1>
-            <h2>Website developer • Website designer • Graphics designer</h2>
+            <span className="eyebrow">Open to frontend opportunities</span>
+            <h1>Ibrahim Abdulmalik</h1>
+            <h2>Frontend Developer • React • Responsive UI • User Experience</h2>
             <p className="header-text">
-              Building ideas into experience, one line of code at a time.
+              I build modern, responsive web experiences that are fast, accessible, and focused on real user value.
               <br />
-              Clean code. Clean vision.
+              Clean code, thoughtful design, and practical product thinking.
             </p>
             <div className="hero-actions">
               <a href="#projects" className="button-link primary">
@@ -320,10 +171,10 @@ function App() {
 
             <div className="about-copy" data-scroll-reveal data-reveal-delay="100ms">
                 <p className="img-desc">
-                  Ibrahim Abdulmalik is a passionate front-end web developer and designer who enjoys turning ideas into modern, interactive digital experiences. He specializes in HTML, CSS, JavaScript and lot more, creating responsive websites that work smoothly across devices and feel polished to use. He is focused on building clean, efficient, and user-friendly interfaces, while also paying attention to accessibility, performance, and visual quality.
+                  I am a front-end developer focused on creating responsive, accessible, and visually polished web experiences. I work with HTML, CSS, JavaScript, and React to turn ideas into clean interfaces that feel intuitive and perform well across devices.
                 </p>
                 <p className="img-desc">
-                  He enjoys the full creative process of web development from layout design and interface styling to adding functionality and refining the user experience. He is constantly learning, exploring new ideas, and improving his skills through real projects. His goal is to keep growing as a developer and build meaningful digital experiences that make an impact.
+                  I enjoy the full product cycle—from layout and styling to interaction and refinement—while keeping user experience, performance, and maintainability at the center. I am actively growing my skills and looking for opportunities to contribute to meaningful digital products.
                 </p>
 
               <div className="about-facts">
@@ -345,9 +196,9 @@ function App() {
         <section id="skills" className="skills-section reveal-on-scroll">
           <div className="section-heading" data-scroll-reveal>
             <span className="eyebrow">Skills &amp; technologies</span>
-            <h2>A focused stack for clean, production-ready interfaces</h2>
+            <h2>A focused stack for building polished, production-ready interfaces</h2>
             <p className="skills-lede">
-              From markup and motion to design systems and deployment, these are the tools I use to turn ideas into reliable web experiences.
+              I work across frontend implementation, responsive design, and deployment to create reliable digital experiences that are clear, useful, and user-friendly.
             </p>
           </div>
 
